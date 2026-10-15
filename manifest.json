@@ -1,0 +1,211 @@
+{
+  "version": "1.2.4",
+  "coordinateVersion": 2,
+  "worldExtent": 1000,
+  "places": 67,
+  "regions": 9,
+  "published": false,
+  "readyToPublish": true,
+  "requires": [
+    "Actual public CDN loading check"
+  ],
+  "publication": {
+    "repository": "xgdddl/fourth-disaster-panel",
+    "tag": "v1.2.4",
+    "redistributionPermission": "Confirmed by the project owner on 2026-10-15",
+    "verification": "Pending deployment; this manifest describes build-time state, not a live service status."
+  },
+  "files": [
+    {
+      "file": "dist/index.js",
+      "bytes": 2527452,
+      "sha256": "556ea619abc065f58098d744430e7cc71347b948c7ba23ae0c924e531706751f"
+    },
+    {
+      "file": "assets/atlas.webp",
+      "bytes": 616240,
+      "sha256": "b491091f0cfdcc05e39f77565e24c1bb64cf12fedd25bbe592052cab49c0c07c"
+    },
+    {
+      "file": "assets/atmosphere.webp",
+      "bytes": 296566,
+      "sha256": "a2aa4a1624befcc227e0f5577dc73a14d66a9c612cb81f985e0da0f00afabe98"
+    },
+    {
+      "file": "assets/landmark-01.webp",
+      "bytes": 33640,
+      "sha256": "d7febae7fd4b51ce817dc9ff33e9eed07784475df8152fa4bfb33bf398c7aa8d"
+    },
+    {
+      "file": "assets/landmark-02.webp",
+      "bytes": 33674,
+      "sha256": "a698f214a56e7fc283a948d91a72147114605b94b0cc731be7816288dee30c78"
+    },
+    {
+      "file": "assets/landmark-03.webp",
+      "bytes": 35398,
+      "sha256": "afcb3e0b37ab9905f19ad92bf6dbcfb53e7ccd69f56b741688391e60cf1752a5"
+    },
+    {
+      "file": "assets/landmark-04.webp",
+      "bytes": 56904,
+      "sha256": "6c1b6422358fbb7564a434f9c0b92292660129392015f1fd248270efe09547ba"
+    },
+    {
+      "file": "assets/landmark-05.webp",
+      "bytes": 36096,
+      "sha256": "16b8c106b3b2fb189ee27c9d98526a0161237461f151830833b5e15f7c6b6149"
+    },
+    {
+      "file": "assets/landmark-06.webp",
+      "bytes": 27338,
+      "sha256": "0d93c847c0c2841e0aef31843f05a8cd87853f21879236a08e31eb896da12df0"
+    },
+    {
+      "file": "assets/landmark-07.webp",
+      "bytes": 30762,
+      "sha256": "72c43b71f09011472c1fe1d2a716c424baefc24ea55d6a0e64b020af58bb427a"
+    },
+    {
+      "file": "assets/landmark-08.webp",
+      "bytes": 36162,
+      "sha256": "38f7e3d3a88c76d5a4f97cb98c500fb65994b9427cbe36908ac1199fdb8ec7dc"
+    },
+    {
+      "file": "assets/landmark-09.webp",
+      "bytes": 30814,
+      "sha256": "af39950c88d2c9ce32d02a1eb9aee5f9a21abf8bb99ef9d69b9bac590699c71e"
+    },
+    {
+      "file": "assets/landmark-10.webp",
+      "bytes": 33406,
+      "sha256": "67eab8134b87f919d59ed5ea49010c5f9c9ddc20a53c1d74fd7ecc4c47438845"
+    },
+    {
+      "file": "assets/landmark-11.webp",
+      "bytes": 37332,
+      "sha256": "aeba0165dc115339a5bd6234bf9018dd510788abaf3e864ff01f69434237d2f1"
+    },
+    {
+      "file": "assets/landmark-12.webp",
+      "bytes": 22754,
+      "sha256": "f48c0f7d9f14bbf1025e23a6569382da9bde8fad170c6a55506be9ce3b0f8977"
+    },
+    {
+      "file": "assets/landmark-13.webp",
+      "bytes": 36244,
+      "sha256": "99ed8904b8232e2c005be35ebebdc451a6af0c00402564d0830755e812b360de"
+    },
+    {
+      "file": "assets/landmark-14.webp",
+      "bytes": 31836,
+      "sha256": "dde8c6c1478bf781ddb3d6148ef49133847d78ef5269580c4f0bb3e22ce690f9"
+    },
+    {
+      "file": "assets/landmark-15.webp",
+      "bytes": 27758,
+      "sha256": "f6935f23e2bf8354619342c7266f3718fa014d1434c78679f9a1d5589247daa0"
+    },
+    {
+      "file": "assets/landmark-16.webp",
+      "bytes": 27536,
+      "sha256": "0fde9895978d3a424696ff83b5e0f1d8c5cc5805eaa49c18978fef0d21ce9d0b"
+    },
+    {
+      "file": "assets/landmark-17.webp",
+      "bytes": 28196,
+      "sha256": "b89eed5efccd59be621b03f16390f766f8046477a2f74178ceb6fcf03949720b"
+    },
+    {
+      "file": "assets/landmark-18.webp",
+      "bytes": 22806,
+      "sha256": "dfb9e2db14a3fe9be04ad9721401f8ec2b98a5747d735f9ad2237fc077b216a3"
+    },
+    {
+      "file": "assets/landmark-19.webp",
+      "bytes": 32632,
+      "sha256": "729506dd56691cf86f1ce820ba0a85751c9b5d8ea8edb7196b7306b7329b7460"
+    },
+    {
+      "file": "assets/landmark-20.webp",
+      "bytes": 33152,
+      "sha256": "a2adbabe743eb0956dd7b5216ff47f314ee9688c1ace740787f61fbca982193b"
+    },
+    {
+      "file": "assets/landmark-21.webp",
+      "bytes": 28192,
+      "sha256": "15d24e7b747d225fcba57e80c35f6b62a38f892f84bfeb6696cb2b9fa0ef391c"
+    },
+    {
+      "file": "assets/landmark-22.webp",
+      "bytes": 25314,
+      "sha256": "44e73b5bd6dd991e5dfbad5de79648dd1accc020884670f003a7f9201d509fe6"
+    },
+    {
+      "file": "assets/landmark-23.webp",
+      "bytes": 33934,
+      "sha256": "396c7f05af4d38567eb8f575eafa6140a0f0658c62173ba9199fe2558402fb6a"
+    },
+    {
+      "file": "assets/landmark-24.webp",
+      "bytes": 29332,
+      "sha256": "57c826f81fedae16ee415f5214a20813cd6ecdbe3f0060ce64d02dceb6fc5df2"
+    },
+    {
+      "file": "assets/landmark-25.webp",
+      "bytes": 179618,
+      "sha256": "89a0e2bbedea62475869615c0c0d4cdbaeeebdab57b767ef7cd4be9756d5d0da"
+    },
+    {
+      "file": "assets/landmark-26.webp",
+      "bytes": 188026,
+      "sha256": "fbb7dbc92daa64f45771022ac9924bb02032ba07cf748dc82837fdcc91a926e3"
+    },
+    {
+      "file": "assets/landmark-27.webp",
+      "bytes": 215614,
+      "sha256": "71aa618dc8fa04324c6fad5f373a61da00455e0198877e979c300d97b6798084"
+    },
+    {
+      "file": "assets/landmark-28.webp",
+      "bytes": 224258,
+      "sha256": "2e668470b75a1bd850763c02be1503fd7088b543f1f3b9d850255c9269da9e12"
+    },
+    {
+      "file": "assets/detail-nw.webp",
+      "bytes": 699308,
+      "sha256": "c223aa882eba985e0e5cf38caac2ac3e84b47349301f0c41861f2f69c4a714d3"
+    },
+    {
+      "file": "assets/detail-ne.webp",
+      "bytes": 833706,
+      "sha256": "1694d440721f60ceab3b3a5674a476e3a4c2d7af9145d8861e86a454c5f545c8"
+    },
+    {
+      "file": "assets/detail-sw.webp",
+      "bytes": 828348,
+      "sha256": "9176f12677ef47d71f1df066dc5be20d6e871245594b9017fc8bc4c43c87e7f3"
+    },
+    {
+      "file": "assets/detail-se.webp",
+      "bytes": 812636,
+      "sha256": "8d1aca9b71b25385e7636cd627f39cd65b59a1ac161e57525c34d2e80c661fdd"
+    },
+    {
+      "file": "package.json",
+      "bytes": 42,
+      "sha256": "609158e6c5fbc237939fa3ddf7faab80ab690bdc0c8d584414a885130103c4e8"
+    },
+    {
+      "file": "第四天灾-在线加载版.json",
+      "bytes": 2371,
+      "sha256": "f74a2b2b7fcb8b5ad8f83d7496fbe47745280059d55f29c1720f0c5ce119079e"
+    }
+  ],
+  "privacy": {
+    "embeddedWorldbookEntries": 0,
+    "embeddedChatMessages": 0,
+    "exportedUserSettings": 0
+  },
+  "offlineBytes": 12680532
+}
