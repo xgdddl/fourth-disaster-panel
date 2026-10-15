@@ -221,7 +221,7 @@ function render(value){const next=currentChat();sd=value||{};dataRevision++;
 }
 function roots(){return [...doc.querySelectorAll('[data-aemap-root]')];}
 function fitCanvas(root){const view=root.querySelector('.aemap-viewport');if(!view||!cameraMath)return;
-  const container=root.closest('.aeu-content');
+  const container=root.closest('#aelderan-content-area')||root.closest('.aeu-content');
   if(container){const style=getComputedStyle(container),padding=parseFloat(style.paddingTop)+parseFloat(style.paddingBottom),chrome=Math.max(0,root.offsetHeight-view.offsetHeight);const height=Math.max(200,Math.min(900,container.clientHeight-padding-chrome));if(view.style.height!==height+'px')view.style.height=height+'px';}else if(view.style.height)view.style.height='';
   const width=view.clientWidth,height=view.clientHeight;if(width<20||height<20)return;
   let c=cameras.get(root);if(!c){c=cameraMath.create(width,height,state.zoom);c.frames=0;c.labels=0;cameras.set(root,c);const p=normalizedCoord(sd.主角面板?.当前位置);if(p)focus(p,root);}
