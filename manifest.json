@@ -1,5 +1,5 @@
 {
-  "version": "1.2.8",
+  "version": "1.2.9",
   "coordinateVersion": 2,
   "worldExtent": 1000,
   "places": 67,
@@ -11,15 +11,15 @@
   ],
   "publication": {
     "repository": "xgdddl/fourth-disaster-panel",
-    "tag": "v1.2.8",
+    "tag": "v1.2.9",
     "redistributionPermission": "Confirmed by the project owner on 2026-10-15",
     "verification": "Pending deployment; this manifest describes build-time state, not a live service status."
   },
   "files": [
     {
       "file": "dist/index.js",
-      "bytes": 2582763,
-      "sha256": "caed5606ace9611c7ac5b8ee73cd6e0e8f5dd6b2ca3f598a45095269442dbd5a"
+      "bytes": 2583067,
+      "sha256": "b6feb40f5eef6e62f2e23e3569f716e0bcd1e4ccdb36e6a7a34d36d166d3815a"
     },
     {
       "file": "assets/atlas.webp",
@@ -199,7 +199,7 @@
     {
       "file": "第四天灾-在线加载版.json",
       "bytes": 2521,
-      "sha256": "99b144fb0f2c7cf48490eea56d6076553de164211a4766ed02b9cb447380d09b"
+      "sha256": "d81c34610f30ac3a691ca92a0e5fb4525606ec9dd30d9fdc0b24346bbeaaab54"
     }
   ],
   "privacy": {
@@ -207,5 +207,5 @@
     "embeddedChatMessages": 0,
     "exportedUserSettings": 0
   },
-  "offlineBytes": 12736649
+  "offlineBytes": 12736956
 }
