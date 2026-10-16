@@ -10,6 +10,6 @@
 
 可按轮次或游戏时间推进，自选参与内容与独立调用，支持失败重试和格式修复。深浅主题、可拖动入口与手机布局均已整合。
 
-[下载在线加载版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.2.6/fourth-disaster-online-v1.2.6.json)，导入酒馆助手并启用即可。需要配套世界书与变量，聊天和API设置保留在本地。
+[下载在线加载版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.2.7/fourth-disaster-online-v1.2.7.json)，导入酒馆助手并启用即可。需要配套世界书与变量，聊天和API设置保留在本地。
 
 基于原状态栏与Z论坛改造，来源见 [说明](THIRD_PARTY_NOTICES.md)。
