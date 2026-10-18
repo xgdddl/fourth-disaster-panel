@@ -1,73 +1,143 @@
 # Music credits / 配乐来源
 
-Optional recordings: creator-licensed CC BY 4.0 tracks and two Musopen public-domain recordings. Rights apply per recording, not merely the underlying composition. Files are retained as downloaded; the two Grieg MP3s are Wikimedia-provided derivatives of the source recordings. No local cuts, normalization or transcoding. Playback volume and repeat are user-controlled. No endorsement by the artists is implied.
+All 12 recordings from Flying Island, by Celestial Aeon Project / Matti Paalanen. Provided by the project owner as the original Jamendo MP3 download with its per-track License.txt. CC BY-NC-ND 3.0: non-commercial sharing with attribution; do not remix, sell or relicense these recordings. Original license: [MUSIC_LICENSE.txt](MUSIC_LICENSE.txt). License deed: https://creativecommons.org/licenses/by-nc-nd/3.0/ . No artist endorsement is implied.
 
-## Hiraeth
+All recording bytes are unchanged: no cuts, transcoding, normalization or embedded-art edits. Only filenames, Chinese display labels and suggested playlist order differ. These are collection metadata, not modifications to the music. This album is primarily melodic fantasy/exploration music; the battle group contains its more forward-moving tracks.
 
-'Hiraeth' by Scott Buckley — released under CC BY 4.0. www.scottbuckley.com.au
+## 暮光之湖 / Lake of Twilight
 
-- Source: https://www.scottbuckley.com.au/library/hiraeth/
-- Download: https://www.scottbuckley.com.au/library/wp-content/uploads/2020/06/sb_hiraeth.mp3
-- License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
-- Packaged file: music/hiraeth.mp3
-- SHA256: f790c7d53b8d802981ff7cdd8c59e22cdfe103ea66aba296c6cf1a65fe7fcf01
-- Changes: None. Original recording bytes retained.
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598442
+- Original file: 04-1598442-Celestial Aeon Project-Lake of Twilight.mp3
+- Hosted file: lake-of-twilight.mp3
+- Bytes: 4620800
+- SHA256: 3113d9ad192f2b9e8de269c7a77689855c9e4877fc2034e6621a306900877747
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-## The Old Ones
+## 初生 / Nascence
 
-'The Old Ones' by Scott Buckley — released under CC BY 4.0. www.scottbuckley.com.au
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598449
+- Original file: 08-1598449-Celestial Aeon Project-Nascence.mp3
+- Hosted file: nascence.mp3
+- Bytes: 3822080
+- SHA256: 06242e2f0323ba269c2316f233e6344e774722cd02329f5298116d7cf046e118
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-- Source: https://www.scottbuckley.com.au/library/the-old-ones/
-- Download: https://www.scottbuckley.com.au/library/wp-content/uploads/2018/10/sb_theoldones.mp3
-- License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
-- Packaged file: music/the-old-ones.mp3
-- SHA256: 6f933a86122fade9ac69b848edf101a1dd286fac788488466b1b77f0e89721ec
-- Changes: None. Original recording bytes retained.
+## 梦之路 / The Road of Dreams
 
-## Legionnaire (Original)
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598450
+- Original file: 12-1598450-Celestial Aeon Project-The Road of Dreams.mp3
+- Hosted file: the-road-of-dreams.mp3
+- Bytes: 3770368
+- SHA256: bf59cbfe276e8d244682bffa795be0dbf3217af23b868ed6741f03b94317459e
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-'Legionnaire (Original)' by Scott Buckley — released under CC BY 4.0. www.scottbuckley.com.au
+## 初光 / The First Light
 
-- Source: https://www.scottbuckley.com.au/library/legionnaire/
-- Download: https://www.scottbuckley.com.au/wp-content/audio/sb_legionnaire.mp3
-- License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
-- Packaged file: music/legionnaire.mp3
-- SHA256: 49230c850b0d3a278aee2871ca684cf4bc87bf4dd1ecc8f453f425bff2dce27c
-- Changes: None. Original recording bytes retained.
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598441
+- Original file: 05-1598441-Celestial Aeon Project-The First Light.mp3
+- Hosted file: the-first-light.mp3
+- Bytes: 5441024
+- SHA256: b1b45ba567f2bbbc6b833bc60dd7d1c17a5cc781cb72184f10dada739bc1430a
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-## 晨景 · Morning Mood
+## 赎愿 / Atonement
 
-Morning Mood — Edvard Grieg; performed by the Czech National Symphony Orchestra as the Musopen Symphony Orchestra, 2012. Recording released into the public domain by Musopen; MP3 derivative provided by Wikimedia Commons.
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598446
+- Original file: 10-1598446-Celestial Aeon Project-Atonement.mp3
+- Hosted file: atonement.mp3
+- Bytes: 4257280
+- SHA256: f652ab658f19df87bf4dabfc31b2098a70d8775e94928f10115bcb9a5a141746
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-- Source: https://commons.wikimedia.org/wiki/File:Musopen_-_Morning.ogg
-- Download: https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1a/Musopen_-_Morning.ogg/Musopen_-_Morning.ogg.mp3
-- License: Public domain dedication by Musopen — https://commons.wikimedia.org/wiki/File:Musopen_-_Morning.ogg#Licensing
-- Packaged file: music/morning-mood.mp3
-- SHA256: bd2fb7b8a51d6063b931da9d32a191269b40311b7521f7c84d7886226e6c0826
-- Changes: Wikimedia-provided MP3 derivative of the Musopen public-domain recording. No local edits or transcoding.
+## 魔法之境 / The Magical Realm
 
-## 在山魔王的宫殿中
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598444
+- Original file: 02-1598444-Celestial Aeon Project-The Magical Realm.mp3
+- Hosted file: the-magical-realm.mp3
+- Bytes: 3411968
+- SHA256: 0ed3b03b6d803ddbaece622b9e612ca496a9371678e36928b05eaf5d9c8da845
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-In the Hall of the Mountain King — Edvard Grieg; performed by the Czech National Symphony Orchestra as the Musopen Symphony Orchestra, 2012. Recording released into the public domain by Musopen; MP3 derivative provided by Wikimedia Commons.
+## 浮空之岛 / Flying Island
 
-- Source: https://commons.wikimedia.org/wiki/File:Musopen_-_In_the_Hall_Of_The_Mountain_King.ogg
-- Download: https://upload.wikimedia.org/wikipedia/commons/transcoded/b/bb/Musopen_-_In_the_Hall_Of_The_Mountain_King.ogg/Musopen_-_In_the_Hall_Of_The_Mountain_King.ogg.mp3
-- License: Public domain dedication by Musopen — https://commons.wikimedia.org/wiki/File:Musopen_-_In_the_Hall_Of_The_Mountain_King.ogg#Licensing
-- Packaged file: music/mountain-king.mp3
-- SHA256: 18945120aa8ef355b15e97b315a575725e938abeb913effd2390d78d9f0427a7
-- Changes: Wikimedia-provided MP3 derivative of the Musopen public-domain recording. No local edits or transcoding.
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598440
+- Original file: 03-1598440-Celestial Aeon Project-Flying Island.mp3
+- Hosted file: flying-island.mp3
+- Bytes: 5694464
+- SHA256: fb56f589084ff2cff7515ca17c22c760d7452bf5a04e768846a1cdfb70b058fe
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-## Tavern Tales · 酒馆逸事
+## 凯尔特森林 / Celtic Forest And Prophecy Retold
 
-Music: Tavern Tales by Alexander Nakarada (https://creatorchords.com). Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598439
+- Original file: 06-1598439-Celestial Aeon Project-Celtic Forest And Prophecy Retold.mp3
+- Hosted file: celtic-forest.mp3
+- Bytes: 4493312
+- SHA256: 1cf462ff6787e6a7784802dcb5734ccd142f1d341c70555166fc98ebad4799d6
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-- Source: https://creatorchords.com/music/tavern-tales/
-- Download: https://d19p7hqu4j8vx0.cloudfront.net/media/media/Tavern_Tales.mp3
-- License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
-- Packaged file: music/tavern-tales.mp3
-- SHA256: ef753383736b7ba0fc46a359a64052d886859e6b229a9a5bee3151c0c65a1bf0
-- Changes: None. Original recording bytes retained.
+## 远行 / The Journey
 
-## Delivery
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598447
+- Original file: 09-1598447-Celestial Aeon Project-The Journey.mp3
+- Hosted file: the-journey.mp3
+- Bytes: 4142080
+- SHA256: 90f046756fdbc8580545ee14f03b0ec83725cae79cc39cc50586badfb6dae593
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
 
-Recordings are loaded on demand from the immutable public snapshot https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/ . Original bytes and credits are retained. They are separate from this CDN code package to avoid the host package-size limit; no audio is embedded into the character card.
+## 未知之境 / To the Unknown
+
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598448
+- Original file: 11-1598448-Celestial Aeon Project-To the Unknown.mp3
+- Hosted file: to-the-unknown.mp3
+- Bytes: 6703616
+- SHA256: 5fcb66ddd21e6e7d82b426a592634e5b73abb37fc6f1de1b1227de054daed4bd
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
+
+## 追逐 / Hide and Seek
+
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598443
+- Original file: 01-1598443-Celestial Aeon Project-Hide and Seek.mp3
+- Hosted file: hide-and-seek.mp3
+- Bytes: 6096896
+- SHA256: 1a38c4470ff8130b5674a9b487c7ff31c4bbebe4090397ff2576297195f8ac82
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
+
+## 天选之人 / The Chosen One
+
+- Composer / artist: Celestial Aeon Project · Matti Paalanen
+- Album: Flying Island
+- Source: https://www.jamendo.com/track/1598438
+- Original file: 07-1598438-Celestial Aeon Project-The Chosen One.mp3
+- Hosted file: the-chosen-one.mp3
+- Bytes: 5575168
+- SHA256: 21eb8d16d9dddbfe921979acecfe6ccc9e948561ad0a6bd45a0cf4da0e5ca818
+- License: CC BY-NC-ND 3.0 — https://creativecommons.org/licenses/by-nc-nd/3.0/
+
+## Delivery and preferences / 分发与记忆
+
+Recordings are hosted separately at the immutable snapshot https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/ . The small CDN program package does not include the large audio directory. This is direct MP3 playback, not a Bandcamp/Bilibili embed; the published version still needs network access to load hosted recordings.
+
+Selected track, volume, play mode and off preference are stored per character card in the current browser. New defaults are 100% volume and full-library shuffle. Audio starts when the user opens the game panel, not when Tavern initializes with the panel collapsed. Explicit off is remembered until the user plays again. Hiding the music picker does not stop music. Explicit off, card changes or disposal release the audio; closing the whole game panel follows the user’s pause-on-close option. Browser playback restrictions show a manual retry, not false success.

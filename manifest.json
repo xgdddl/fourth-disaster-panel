@@ -1,5 +1,5 @@
 {
-  "version": "1.3.2",
+  "version": "1.3.3",
   "coordinateVersion": 2,
   "worldExtent": 1000,
   "places": 67,
@@ -11,15 +11,15 @@
   ],
   "publication": {
     "repository": "xgdddl/fourth-disaster-panel",
-    "tag": "v1.3.2",
+    "tag": "v1.3.3",
     "redistributionPermission": "Confirmed by the project owner on 2026-10-15",
     "verification": "Pending deployment; this manifest describes build-time state, not a live service status."
   },
   "files": [
     {
       "file": "dist/index.js",
-      "bytes": 2646350,
-      "sha256": "1356e2e16d26f91b3e2effdc228b1ded874de36c0a0f13999e8d13e71107235d"
+      "bytes": 2653668,
+      "sha256": "52d7ce61a0f5243e81598020cd276206c96163729838264b6e3b4c817e5223cd"
     },
     {
       "file": "assets/atlas.webp",
@@ -199,56 +199,98 @@
     {
       "file": "第四天灾-在线加载版.json",
       "bytes": 2521,
-      "sha256": "33a68af0f33879aa06e0866eaa598010d5609ea4c7dc00cd03bd244f948f3ace"
+      "sha256": "c31a9dec7a62303b838178a8e64fa3b0a8ebb080f14e108530fe1b895669db44"
     },
     {
       "file": "MUSIC_CREDITS.md",
-      "bytes": 4619,
-      "sha256": "8fbfcec37f719a038ce6c4ca0375b68613103358be8e43dd36b452435f396723"
+      "bytes": 7183,
+      "sha256": "580600a26e1f68b7c66c8f4fda7d8726b45c5bba78144003aca62c607923febb"
+    },
+    {
+      "file": "MUSIC_LICENSE.txt",
+      "bytes": 854,
+      "sha256": "01027776aa0b4e01293beb716467ab36719c74a2e16b608a5469fae7f327e35c"
     }
   ],
   "externalFiles": [
     {
-      "file": "music/hiraeth.mp3",
-      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/hiraeth.mp3",
-      "bytes": 13851302,
-      "sha256": "f790c7d53b8d802981ff7cdd8c59e22cdfe103ea66aba296c6cf1a65fe7fcf01"
+      "file": "music/flying-island/lake-of-twilight.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/lake-of-twilight.mp3",
+      "bytes": 4620800,
+      "sha256": "3113d9ad192f2b9e8de269c7a77689855c9e4877fc2034e6621a306900877747"
     },
     {
-      "file": "music/the-old-ones.mp3",
-      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/the-old-ones.mp3",
-      "bytes": 12086530,
-      "sha256": "6f933a86122fade9ac69b848edf101a1dd286fac788488466b1b77f0e89721ec"
+      "file": "music/flying-island/nascence.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/nascence.mp3",
+      "bytes": 3822080,
+      "sha256": "06242e2f0323ba269c2316f233e6344e774722cd02329f5298116d7cf046e118"
     },
     {
-      "file": "music/legionnaire.mp3",
-      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/legionnaire.mp3",
-      "bytes": 3622107,
-      "sha256": "49230c850b0d3a278aee2871ca684cf4bc87bf4dd1ecc8f453f425bff2dce27c"
+      "file": "music/flying-island/the-road-of-dreams.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/the-road-of-dreams.mp3",
+      "bytes": 3770368,
+      "sha256": "bf59cbfe276e8d244682bffa795be0dbf3217af23b868ed6741f03b94317459e"
     },
     {
-      "file": "music/morning-mood.mp3",
-      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/morning-mood.mp3",
-      "bytes": 5674930,
-      "sha256": "bd2fb7b8a51d6063b931da9d32a191269b40311b7521f7c84d7886226e6c0826"
+      "file": "music/flying-island/the-first-light.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/the-first-light.mp3",
+      "bytes": 5441024,
+      "sha256": "b1b45ba567f2bbbc6b833bc60dd7d1c17a5cc781cb72184f10dada739bc1430a"
     },
     {
-      "file": "music/mountain-king.mp3",
-      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/mountain-king.mp3",
-      "bytes": 3633524,
-      "sha256": "18945120aa8ef355b15e97b315a575725e938abeb913effd2390d78d9f0427a7"
+      "file": "music/flying-island/atonement.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/atonement.mp3",
+      "bytes": 4257280,
+      "sha256": "f652ab658f19df87bf4dabfc31b2098a70d8775e94928f10115bcb9a5a141746"
     },
     {
-      "file": "music/tavern-tales.mp3",
-      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/tavern-tales.mp3",
-      "bytes": 7904493,
-      "sha256": "ef753383736b7ba0fc46a359a64052d886859e6b229a9a5bee3151c0c65a1bf0"
+      "file": "music/flying-island/the-magical-realm.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/the-magical-realm.mp3",
+      "bytes": 3411968,
+      "sha256": "0ed3b03b6d803ddbaece622b9e612ca496a9371678e36928b05eaf5d9c8da845"
+    },
+    {
+      "file": "music/flying-island/flying-island.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/flying-island.mp3",
+      "bytes": 5694464,
+      "sha256": "fb56f589084ff2cff7515ca17c22c760d7452bf5a04e768846a1cdfb70b058fe"
+    },
+    {
+      "file": "music/flying-island/celtic-forest.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/celtic-forest.mp3",
+      "bytes": 4493312,
+      "sha256": "1cf462ff6787e6a7784802dcb5734ccd142f1d341c70555166fc98ebad4799d6"
+    },
+    {
+      "file": "music/flying-island/the-journey.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/the-journey.mp3",
+      "bytes": 4142080,
+      "sha256": "90f046756fdbc8580545ee14f03b0ec83725cae79cc39cc50586badfb6dae593"
+    },
+    {
+      "file": "music/flying-island/to-the-unknown.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/to-the-unknown.mp3",
+      "bytes": 6703616,
+      "sha256": "5fcb66ddd21e6e7d82b426a592634e5b73abb37fc6f1de1b1227de054daed4bd"
+    },
+    {
+      "file": "music/flying-island/hide-and-seek.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/hide-and-seek.mp3",
+      "bytes": 6096896,
+      "sha256": "1a38c4470ff8130b5674a9b487c7ff31c4bbebe4090397ff2576297195f8ac82"
+    },
+    {
+      "file": "music/flying-island/the-chosen-one.mp3",
+      "url": "https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/c9f19baa2883d4df8bbdbf177d4f6f82abb4c120/music/flying-island/the-chosen-one.mp3",
+      "bytes": 5575168,
+      "sha256": "21eb8d16d9dddbfe921979acecfe6ccc9e948561ad0a6bd45a0cf4da0e5ca818"
     }
   ],
+  "externalPlayers": [],
   "privacy": {
     "embeddedWorldbookEntries": 0,
     "embeddedChatMessages": 0,
     "exportedUserSettings": 0
   },
-  "offlineBytes": 12801076
+  "offlineBytes": 12808943
 }
