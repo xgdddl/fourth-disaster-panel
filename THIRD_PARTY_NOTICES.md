@@ -56,5 +56,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 # Optional music
 
-The optional six-track player uses original recordings by Scott Buckley under CC BY 4.0. They are not original compositions by this plugin's author and are not covered by the code's license. See [MUSIC_CREDITS.md](MUSIC_CREDITS.md) for track sources, original attribution, license links and file hashes. The recordings are unmodified. No artist endorsement is implied.
+The optional player includes creator-licensed recordings by Scott Buckley and Alexander Nakarada under CC BY 4.0, plus two Edvard Grieg recordings performed by the Czech National Symphony Orchestra as the Musopen Symphony Orchestra and dedicated to the public domain by Musopen. The Grieg MP3s are Wikimedia-provided derivatives, not locally transcoded. They are not original compositions by this plugin's author and are not covered by the code's license. See [MUSIC_CREDITS.md](MUSIC_CREDITS.md) for per-recording sources, attribution, permission declarations and file hashes. No local audio edits or artist endorsement are implied.
 
