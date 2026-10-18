@@ -67,3 +67,7 @@ Music: Tavern Tales by Alexander Nakarada (https://creatorchords.com). Licensed 
 - Packaged file: music/tavern-tales.mp3
 - SHA256: ef753383736b7ba0fc46a359a64052d886859e6b229a9a5bee3151c0c65a1bf0
 - Changes: None. Original recording bytes retained.
+
+## Delivery
+
+Recordings are loaded on demand from the immutable public snapshot https://raw.githubusercontent.com/xgdddl/fourth-disaster-panel/3442ebdbbf19b4d5203cf452515e0d562f4c79c2/music/ . Original bytes and credits are retained. They are separate from this CDN code package to avoid the host package-size limit; no audio is embedded into the character card.

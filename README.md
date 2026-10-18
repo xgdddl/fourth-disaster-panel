@@ -10,8 +10,10 @@
 
 可按轮次或游戏时间推进，自选参与内容与独立调用，支持失败重试和格式修复。深浅主题、可拖动入口与手机布局均已整合。
 
-[下载在线加载版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.1/fourth-disaster-online-v1.3.1.json)，导入酒馆助手并启用即可。需要配套世界书与变量，聊天和API设置保留在本地。
+[下载在线加载版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.2/fourth-disaster-online-v1.3.2.json)，导入酒馆助手并启用即可。需要配套世界书与变量，聊天和API设置保留在本地。
 
 内置六首可选配乐，包括《晨景》《在山魔王的宫殿中》与酒馆民谣风配乐，点击播放才加载。曲目、音量、循环方式与关闭偏好按角色卡保存在当前浏览器；重新进入不会自动出声，清理网站数据后需重新设置。音乐不写入剧情变量、不调用AI。每份录音的署名与许可见 [音乐来源](MUSIC_CREDITS.md)。
 
 基于原状态栏与Z论坛改造，来源见 [说明](THIRD_PARTY_NOTICES.md)。
+
+代码与图像使用固定版本CDN；六首录音从仓库的固定提交按需读取，音质不变，不将大音频混入CDN代码包。
