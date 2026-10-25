@@ -11,7 +11,11 @@
 
 可按轮次或游戏时间推进，自选参与内容与独立调用，支持失败重试和格式修复。深浅主题、可拖动入口与手机布局均已整合。
 
-[下载在线加载版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.6/fourth-disaster-online-v1.3.6.json)，导入酒馆助手并启用即可；请勿与本地完整版同时启用。需要配套世界书与变量，聊天和API设置保留在本地。MVU修复依赖当前卡的MVU与ZOD；[只读适配桥](integrations/mvu-zod-readonly-bridge.js)供接入现用ZOD脚本，不作为独立脚本运行，不替换原Schema。
+[下载统一面板在线版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.8/fourth-disaster-online-v1.3.8.json)，导入酒馆助手并启用即可；请勿与本地完整版同时启用。需要配套世界书与变量，聊天和API设置保留在本地。MVU修复依赖当前卡的MVU与ZOD；[只读适配桥](integrations/mvu-zod-readonly-bridge.js)供接入现用ZOD脚本，不作为独立脚本运行，不替换原Schema。
+
+[创意工坊在线版 V0.1.1](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.8/fourth-disaster-workshop-online-v0.1.1.json)为可选配套脚本，可浏览、创作和安装社区内容。它与统一面板分开启用，同类工坊只启用一份；共享作品服务仍使用原工坊网站。
+
+V1.3.8包括手动社区立即推进和世界书改名后的来源回退：地图与幕后资料优先使用有效手动选择，旧书名失效时补充当前角色／聊天的有效绑定。没有有效绑定时仍需绑定或选择，不扫描全库猜测名称。工坊 V0.1.1修复页面混叠，进入时只显示工坊内容，退出恢复原页。
 
 每轮核对会把本轮正文、前后变量、Schema与相关世界书规则发给你所选的模型接口；证据不足、存档变化或检查失败时停止，不自动追加收费重试。AI语义判断并非绝对可靠，复杂时间和遗漏仍可能需要人工判断。
 
