@@ -11,7 +11,7 @@
 
 可按轮次或游戏时间推进，自选参与内容与独立调用，支持失败重试和格式修复。深浅主题、可拖动入口与手机布局均已整合。
 
-[下载统一面板在线版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.9/fourth-disaster-online-v1.3.9.json)，导入酒馆助手并启用即可；请勿与本地完整版同时启用。需要配套世界书与变量，聊天和API设置保留在本地。MVU修复依赖当前卡的MVU与ZOD；[只读适配桥](integrations/mvu-zod-readonly-bridge.js)供接入现用ZOD脚本，不作为独立脚本运行，不替换原Schema。
+[下载统一面板在线版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.10/fourth-disaster-online-v1.3.10.json)，导入酒馆助手并启用即可；请勿与本地完整版同时启用。需要配套世界书与变量，聊天和API设置保留在本地。MVU修复依赖当前卡的MVU与ZOD；[只读适配桥](integrations/mvu-zod-readonly-bridge.js)供接入现用ZOD脚本，不作为独立脚本运行，不替换原Schema。
 
 [创意工坊在线版 V0.1.1](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.8/fourth-disaster-workshop-online-v0.1.1.json)为可选配套脚本，可浏览、创作和安装社区内容。它与统一面板分开启用，同类工坊只启用一份；共享作品服务仍使用原工坊网站。
 
@@ -26,3 +26,5 @@ V1.3.8包括手动社区立即推进和世界书改名后的来源回退：地�
 代码与图像使用固定版本CDN，原音频单独固定托管、点击才按需加载，不把大音频塞进角色卡；在线版仍需网络。没有B站／Bandcamp嵌入播放器。
 
 V1.3.9仅修MVU触发时序：空回、用户消息留在末尾或旧AI回复未变化时静默跳过；实际有效回复晚到仍可处理，同一回合的同一异常只提示一次。未改变三种修复模式、API配置或写入协议。
+
+V1.3.10将已完成的手机版修订整合到在线主体：左侧分类可用边缘细把手收放，全部／置顶／回收站固定在正文顶部；修复档案设置弹层裁切，整理地点标题与驻地空态，并减少重复点击重绘和无用尺寸读取。沿用V1.3.9的MVU修复，工坊、图像和音乐资源保持原文件。已做320／390px内置浏览器响应式核验，未进行手机真机帧率测试。

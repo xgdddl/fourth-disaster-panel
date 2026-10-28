@@ -1,5 +1,5 @@
 {
-  "version": "1.3.9",
+  "version": "1.3.10",
   "coordinateVersion": 2,
   "worldExtent": 1000,
   "places": 67,
@@ -11,15 +11,15 @@
   ],
   "publication": {
     "repository": "xgdddl/fourth-disaster-panel",
-    "tag": "v1.3.9",
+    "tag": "v1.3.10",
     "redistributionPermission": "Confirmed by the project owner on 2026-10-15",
     "verification": "Pending deployment; this manifest describes build-time state, not a live service status."
   },
   "files": [
     {
       "file": "dist/index.js",
-      "bytes": 2834949,
-      "sha256": "7e05494645c08bcee1db27e5883705aa471d5db08bb2c4d724e5a4641a23b26a"
+      "bytes": 2969555,
+      "sha256": "c9c48934a5d1d02a7bfa5d9e2b44e5433c49f86cfb876e0546bdf622f38d1b9f"
     },
     {
       "file": "assets/atlas.webp",
@@ -198,8 +198,8 @@
     },
     {
       "file": "第四天灾-在线加载版.json",
-      "bytes": 2669,
-      "sha256": "50455c0f68ad5f0135a34ceae02030e40a3b59373c52eabe0999fed7a9976514"
+      "bytes": 2778,
+      "sha256": "98d4f92289f74d92331c60e942766dc06ebb050dca27c8a8f4222a9f86e939ca"
     },
     {
       "file": "integrations/mvu-zod-readonly-bridge.js",
@@ -215,6 +215,21 @@
       "file": "MUSIC_LICENSE.txt",
       "bytes": 854,
       "sha256": "01027776aa0b4e01293beb716467ab36719c74a2e16b608a5469fae7f327e35c"
+    },
+    {
+      "file": "fourth-disaster-online-v1.3.10.json",
+      "bytes": 2778,
+      "sha256": "98d4f92289f74d92331c60e942766dc06ebb050dca27c8a8f4222a9f86e939ca"
+    },
+    {
+      "file": "src/mobile/navigation.js",
+      "bytes": 37346,
+      "sha256": "21b172c628570a61863a34bdd8c3e819360a41eae0f0089931c9f53955c92624"
+    },
+    {
+      "file": "src/mobile/navigation.css",
+      "bytes": 95547,
+      "sha256": "d38d3702df1fc7495d0a9a241041353565c49b4ab728d04b1962ca0438a13e08"
     }
   ],
   "externalFiles": [
@@ -297,5 +312,11 @@
     "embeddedChatMessages": 0,
     "exportedUserSettings": 0
   },
-  "offlineBytes": 12990902
+  "offlineBytes": 12990902,
+  "mobile": {
+    "sourceSHA256": "21b172c628570a61863a34bdd8c3e819360a41eae0f0089931c9f53955c92624",
+    "cssSHA256": "d38d3702df1fc7495d0a9a241041353565c49b4ab728d04b1962ca0438a13e08",
+    "compiledSHA256": "fe3f1d6d7ab618f91b5d032f307d0a10e8c6ff5150221ad0bb32188a98f5db30",
+    "integrated": true
+  }
 }
