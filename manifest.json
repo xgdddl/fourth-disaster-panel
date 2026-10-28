@@ -1,5 +1,5 @@
 {
-  "version": "1.3.8",
+  "version": "1.3.9",
   "coordinateVersion": 2,
   "worldExtent": 1000,
   "places": 67,
@@ -11,15 +11,15 @@
   ],
   "publication": {
     "repository": "xgdddl/fourth-disaster-panel",
-    "tag": "v1.3.8",
+    "tag": "v1.3.9",
     "redistributionPermission": "Confirmed by the project owner on 2026-10-15",
     "verification": "Pending deployment; this manifest describes build-time state, not a live service status."
   },
   "files": [
     {
       "file": "dist/index.js",
-      "bytes": 2833735,
-      "sha256": "a114dcbfb3f047a18b8c9b2901f30cf21de72c2a6efbfac737fe28dbe610e836"
+      "bytes": 2834949,
+      "sha256": "7e05494645c08bcee1db27e5883705aa471d5db08bb2c4d724e5a4641a23b26a"
     },
     {
       "file": "assets/atlas.webp",
@@ -198,8 +198,8 @@
     },
     {
       "file": "第四天灾-在线加载版.json",
-      "bytes": 2557,
-      "sha256": "07e8711a87a6d43a3fee2e06c2ef550837fb9ee2455cb8dfa87b99f6938d6790"
+      "bytes": 2669,
+      "sha256": "50455c0f68ad5f0135a34ceae02030e40a3b59373c52eabe0999fed7a9976514"
     },
     {
       "file": "integrations/mvu-zod-readonly-bridge.js",
