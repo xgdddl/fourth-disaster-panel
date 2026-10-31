@@ -1,5 +1,5 @@
 {
-  "version": "1.3.10",
+  "version": "1.3.11",
   "coordinateVersion": 2,
   "worldExtent": 1000,
   "places": 67,
@@ -11,15 +11,15 @@
   ],
   "publication": {
     "repository": "xgdddl/fourth-disaster-panel",
-    "tag": "v1.3.10",
+    "tag": "v1.3.11",
     "redistributionPermission": "Confirmed by the project owner on 2026-10-15",
-    "verification": "Pending deployment; this manifest describes build-time state, not a live service status."
+    "verification": "Build-time state; release not yet published."
   },
   "files": [
     {
       "file": "dist/index.js",
-      "bytes": 2969555,
-      "sha256": "c9c48934a5d1d02a7bfa5d9e2b44e5433c49f86cfb876e0546bdf622f38d1b9f"
+      "bytes": 2996540,
+      "sha256": "a924cb0ebd9f372113ae8951b208ffd89ba37a71788f75a8016f39a5caf184c7"
     },
     {
       "file": "assets/atlas.webp",
@@ -198,8 +198,8 @@
     },
     {
       "file": "第四天灾-在线加载版.json",
-      "bytes": 2778,
-      "sha256": "98d4f92289f74d92331c60e942766dc06ebb050dca27c8a8f4222a9f86e939ca"
+      "bytes": 2479,
+      "sha256": "2fdd6189fbb1bd6e672367407824cf4613903b3e6f5fd5983f0b4b737cb7c2a5"
     },
     {
       "file": "integrations/mvu-zod-readonly-bridge.js",
@@ -318,5 +318,11 @@
     "cssSHA256": "d38d3702df1fc7495d0a9a241041353565c49b4ab728d04b1962ca0438a13e08",
     "compiledSHA256": "fe3f1d6d7ab618f91b5d032f307d0a10e8c6ff5150221ad0bb32188a98f5db30",
     "integrated": true
+  },
+  "workshop": {
+    "version": "0.1.3",
+    "categories": 11,
+    "service": "https://fourth-disaster-workshop-20261025.balmysquid7.chatgpt.site",
+    "defaultInstallEnabled": false
   }
 }

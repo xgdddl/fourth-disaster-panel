@@ -1,0 +1,22 @@
+{
+  "type": "script",
+  "enabled": false,
+  "name": "第四天灾创意工坊在线入口 V0.1.3",
+  "id": "313acb22-2d1e-4e59-847e-40ca04f7907e",
+  "content": "/* Fourth Disaster workshop: fixed-version online entry. */\n(()=>{\n const host=window.parent||window,doc=host.document;\n let disposed=false,loading=false;\n async function load(){\n  if(disposed||loading)return;loading=true;doc.getElementById('fdw-online-error')?.remove();\n  try{await import(\"https://cdn.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@v1.3.11/workshop/index.js\");}\n  catch(error){\n   console.warn('[第四天灾工坊加载]',error);if(disposed)return;\n   const box=doc.createElement('div');box.id='fdw-online-error';box.setAttribute('role','alert');\n   box.style.cssText='position:fixed;right:16px;bottom:18px;z-index:2147483647;max-width:360px;padding:14px;background:#242820;color:#f2e6c9;border:1px solid #b79a63;font:13px/1.7 sans-serif';\n   const label=doc.createElement('p');label.textContent='创意工坊加载失败，草稿与已安装内容仍保留。请检查网络后重新加载。';box.append(label);\n   const retry=doc.createElement('button');retry.textContent='重新加载';retry.addEventListener('click',load);box.append(retry);doc.body.append(box);\n  }finally{loading=false;}\n }\n window.addEventListener('pagehide',()=>{disposed=true;doc.getElementById('fdw-online-error')?.remove();},{once:true});\n load();\n})();",
+  "info": "第四天灾内容扩展工坊，支持武器、装备、饰品、特殊物品、玩家与NPC等设定分享。含上传教程、ZOD字段提示、页面内确认与手机布局。安装到独立扩展世界书，新增默认停用；不自动发放物品。 在线入口与统一面板V1.3.11配套；不要同时启用本地工坊。",
+  "button": {
+    "enabled": true,
+    "buttons": [
+      {
+        "name": "打开第四天灾工坊",
+        "visible": true
+      }
+    ]
+  },
+  "data": {},
+  "export_with": {
+    "data": false,
+    "button": true
+  }
+}
