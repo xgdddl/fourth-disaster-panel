@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "tag": "immersive-v0.1.0",
+  "runtimePath": "immersive/0.1.0/index.js",
+  "runtimeBytes": 768707,
+  "runtimeSHA256": "24e61dce1b1887b60d67280612ebb9705d0d7955f02991b4d6146def440ba5fa",
+  "entry": "aelderan-immersive-online-v0.1.0.json",
+  "entryBytes": 3798,
+  "entrySHA256": "1c7714f1f6ee66f0ad482e3b7f116ab307ceacc4ebe2d1821b107d3c3559cac5",
+  "cdn": "https://cdn.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@immersive-v0.1.0/immersive/0.1.0/index.js",
+  "sourceSHA256": "4d5dfb5e94ad5abd48f88f45a3c5e62c55b4621f495841f2e77adcde80e137eb"
+}

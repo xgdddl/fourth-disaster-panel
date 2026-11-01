@@ -1,0 +1,22 @@
+{
+  "type": "script",
+  "enabled": false,
+  "name": "艾尔德兰 · 沉浸阅读（在线版 V0.1.0）",
+  "id": "a12e7c33-8639-4e24-870e-5102ce73126f",
+  "info": "艾尔德兰整屏沉浸阅读：各页导航与NPC、阵营等档案名称统一花体，六种高清背景可选，保留正文字体设置。需同时启用现有第四天灾统一面板。此在线入口和沉浸本地版只启用一份；角色存档与变量仍保存在本机酒馆。",
+  "button": {
+    "enabled": true,
+    "buttons": [
+      {
+        "name": "沉浸阅读",
+        "visible": true
+      }
+    ]
+  },
+  "data": {},
+  "export_with": {
+    "data": true,
+    "button": true
+  },
+  "content": "/* Aelderan immersive reader 0.1.0; keep only one immersive entry enabled. */\n(()=>{\n const host=window.parent||window,doc=host.document,urls=[\"https://cdn.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@immersive-v0.1.0/immersive/0.1.0/index.js\",\"https://fastly.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@immersive-v0.1.0/immersive/0.1.0/index.js\"],helpers={getVariables:typeof getVariables==='undefined'?undefined:getVariables,getButtonEvent:typeof getButtonEvent==='undefined'?undefined:getButtonEvent,eventOn:typeof eventOn==='undefined'?undefined:eventOn,getCharWorldbookNames:typeof getCharWorldbookNames==='undefined'?undefined:getCharWorldbookNames,getWorldbook:typeof getWorldbook==='undefined'?undefined:getWorldbook,deleteWorldbookEntries:typeof deleteWorldbookEntries==='undefined'?undefined:deleteWorldbookEntries,createWorldbookEntries:typeof createWorldbookEntries==='undefined'?undefined:createWorldbookEntries,createChatMessages:typeof createChatMessages==='undefined'?undefined:createChatMessages,triggerSlash:typeof triggerSlash==='undefined'?undefined:triggerSlash,jQuery:typeof jQuery==='function'?jQuery:typeof $==='function'?$:undefined,_:typeof _==='undefined'?undefined:_};\n let pending=false,finished=false,cancelled=false;\n async function load(){\n  if(pending||finished||cancelled)return;pending=true;doc.getElementById('air-online-load-error')?.remove();\n  try{\n   let lastError;\n   for(const url of urls){\n    let timer;\n    try{const module=await Promise.race([import(url),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('timeout')),12000)})]);if(cancelled)return;if(typeof module.default!=='function')throw new Error('invalid reader module');const reader=module.default(helpers);if(!reader?.open)throw new Error('reader installation failed');finished=true;return;}\n    catch(error){lastError=error;}finally{clearTimeout(timer);}\n   }\n   throw lastError||new Error('reader unavailable');\n  }catch{if(!cancelled)showError();}finally{pending=false;}\n }\n function showError(){\n  doc.getElementById('air-online-load-error')?.remove();const box=doc.createElement('aside');box.id='air-online-load-error';box.setAttribute('role','alert');box.style.cssText='position:fixed;z-index:2147483647;left:16px;right:16px;bottom:18px;max-width:440px;margin:auto;padding:16px;background:#182a36;color:#dfe9ee;border:1px solid #89a6b7;font:14px/1.8 sans-serif';\n  const text=doc.createElement('p');text.textContent='沉浸界面暂时无法载入，请检查网络后重试。也可以停用在线入口，改用本地完整版。';box.append(text);\n  for(const [label,action]of [['重新加载',load],['收起提示',()=>box.remove()]]){const button=doc.createElement('button');button.textContent=label;button.style.cssText='min-height:40px;margin-right:8px;padding:6px 12px;background:#233b49;color:#e2edf3;border:1px solid #849faf';button.addEventListener('click',action);box.append(button);}doc.body.append(box);\n }\n window.addEventListener('pagehide',()=>{cancelled=true;doc.getElementById('air-online-load-error')?.remove();},{once:true});load();\n})();\n"
+}
