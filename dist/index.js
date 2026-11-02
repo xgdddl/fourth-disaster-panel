@@ -23273,7 +23273,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
   let route = nav.resolve(), routing = false, resetContentScroll = false;
   const rememberedViews = {};
   const handles = [];
-  let renderedFormal = null;
+  let renderedFormal = null, heartbeatStamp = "";
   let pendingNativeOrganization = null;
   // Shared shell symbols. Native uploads and calculations stay authoritative; explicit visual adapters are separate.
   const icons = {
@@ -23681,7 +23681,13 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     });
     mast.addEventListener('pointerup',()=>drag=null); mast.addEventListener('pointercancel',()=>drag=null);
     observer=new MutationObserver(records=>{if(records.some(record=>!record.target.closest?.('#aeu-music-panel,[data-aeu-music-audio],[data-aeu-music],#fourth-workshop-panel,#aelderan-immersive-reader,.air-atmosphere')))scheduleMount();}); observer.observe(doc.body,{childList:true,subtree:true});
-    timer=setInterval(()=>{if(!shell?.hidden&&shell.dataset.fdwOpened!=='true')scheduleMount();},1200);
+    timer=setInterval(()=>{
+      if(shell?.hidden||shell.dataset.fdwOpened==='true')return;
+      const workflow=globalThis.__AELDERAN_WORLD_ENGINE__?.uiStatus?.();
+      const stamp=[workflow?.状态,workflow?.阶段,workflow?.调用统计?.总数,workflow?.错误].join('|');
+      const missing=route.view.owner==='engine'&&!shell.querySelector('.aew-world-panel');
+      if(missing||stamp!==heartbeatStamp){heartbeatStamp=stamp;scheduleMount();}
+    },1200);
     if (typeof eventOn==='function' && typeof tavern_events!=='undefined') {
       if(typeof getButtonEvent==='function')handles.push(eventOn(getButtonEvent('第四天灾论坛'),()=>{
         requestAnimationFrame(()=>{if(!disposed)open();});
