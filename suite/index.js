@@ -1,12 +1,12 @@
-/* Fourth Disaster 1.3.20: one owner for panel, workshop and reader. */
+/* Fourth Disaster 1.3.21: one owner for panel, workshop and reader. */
 export default async function installSuite(helpers={}){
  const {$,Mvu,SillyTavern,YAML,_,createAccessoryItem,createArchiveRepairs,createArmorItem,createAudio,createBagItem,createCascadeTexture,createCatalog,createChatMessages,createController,createDefaultSetCallback,createEmptyEquipEffects,createPanel,createReaderRecordDetails,createReaderSceneTheme,createSchemas,createSettingsSchema,createSkillItem,createWeaponItem,createWorldRecords,createWorldbookEntries,deleteWorldbookEntries,deleteZPrefixed,eventCard,eventChangeError,eventFinished,eventOn,eventOnce,formatCheckFormula,formatDamageResult,generate,generateCrossSectionSummary,generateHistoryReference,generateId,generatePosts,generatePostsMerged,generatePostsSequential,generateRaw,getAllVariables,getAllowedProps,getAttributesCost,getAvailParts,getBreakBonus,getButtonEvent,getByKey,getByValue,getCampColor,getCharWorldbookNames,getCharacterRef,getChatMessages,getChatWorldbookName,getClassList,getClassOrder,getCompletions,getComponentBounds,getComponentInstances,getComponentName,getComponentRenderCode,getCurrentData,getCurrentMessageId,getDefaultAvatarIcon,getDiscardQuantityBounds,getEquipEffectsFromDescription,getEquipSlotIcon,getFilteredAndSortedData,getHeroData,getHeroSummary,getHpBarStateClass,getIdentifier,getInspectorState,getInspectorTree,getInvDraft,getItemIcon,getKeyframes,getLastMessageId,getLatestMvuWriteContext,getLevel,getLevelRules,getLoreDraft,getLoreSummary,getModelList,getMvuDataSafe,getMvuGlobal,getMvuStatData,getOptions,getQuestRareColor,getRepStyle,getScriptId,getSettings,getSkillExp,getSkillsDraft,getTemplateColorClass,getTemplateMultiplier,getVal,getValidSubTab,getValue,getVariables,getVariantOrder,getVariants,getWorldbook,getWorldbookNames,getZsdFontScale,iframe_events,insertOrAssignVariables,jQuery,loadFromSlot,loadGroup,loadLoreEntries,loadModels,loadPrefs,loadProfile,loadRoot,reloadIframe,replaceVariables,replaceWith,retrieveLoreContext,saveAvatars,saveBooks,saveDetailsState,saveProfile,saveRoot,saveSchedule,saveSlot,saveSubTabs,saveTheme,saveToSlot,saveUI,setActive,setAttr,setBusy,setDiscardQuantity,setLevel,setMode,setPair,setPlayMode,setScene,setText,tavern_events,toastr,triggerAIInventory,triggerAILore,triggerAISkills,triggerSlash,updateAiDiagnostic,updateBarVisual,updateBooks,updateFactions,updateFn,updateForumLineageLink,updateMajorRegions,updateMaxTotal,updatePlotToMvu,updatePluginSettings,updateScheduleFields,updateSelects,updateSlotUI,updateTotalAgiMod,updateVariablesWith,waitForReply,waitForTerminal,waitGlobalInitialized,z}=helpers;
  const host=window.parent||window,doc=host.document;
  const previous=host.__AEU_FINAL_SUITE__;
- if(previous?.version==='1.3.20'&&previous.state==='ready')return previous;
- if(previous?.version==='1.3.20'&&previous.state==='loading')return previous.ready;
+ if(previous?.version==='1.3.21'&&previous.state==='ready')return previous;
+ if(previous?.version==='1.3.21'&&previous.state==='loading')return previous.ready;
  let cancelled=false;
- const suite={version:'1.3.20',state:'loading',components:{panel:false,workshop:false,reader:false},open(){host.__AEU_IMMERSIVE_READER__?.open?.();},openWorkshop(){host.__FOURTH_WORKSHOP__?.open?.();},dispose(){if(cancelled)return;cancelled=true;suite.state='disposed';host.__AEU_IMMERSIVE_READER__?.destroy?.();host.__FOURTH_WORKSHOP__?.dispose?.();for(const key of ['__AEU_MOBILE_NAV__','__AEU_MAP__','__AEU_SHELL__','__AELDERAN_WORLD_ENGINE__'])try{globalThis[key]?.dispose?.();}catch{}if(host.__AEU_FINAL_SUITE__===suite)delete host.__AEU_FINAL_SUITE__;}};
+ const suite={version:'1.3.21',state:'loading',components:{panel:false,workshop:false,reader:false},open(){host.__AEU_IMMERSIVE_READER__?.open?.();},openWorkshop(){host.__FOURTH_WORKSHOP__?.open?.();},dispose(){if(cancelled)return;cancelled=true;suite.state='disposed';host.__AEU_IMMERSIVE_READER__?.destroy?.();host.__FOURTH_WORKSHOP__?.dispose?.();for(const key of ['__AEU_MOBILE_NAV__','__AEU_MAP__','__AEU_SHELL__','__AELDERAN_WORLD_ENGINE__'])try{globalThis[key]?.dispose?.();}catch{}if(host.__AEU_FINAL_SUITE__===suite)delete host.__AEU_FINAL_SUITE__;}};
  host.__AEU_FINAL_SUITE__=suite;window.addEventListener('pagehide',()=>suite.dispose(),{once:true});
  async function waitFor(predicate,message){const deadline=Date.now()+15000;while(!predicate()){if(cancelled)throw new Error('suite closed');if(Date.now()>deadline)throw new Error(message);await new Promise(resolve=>host.setTimeout(resolve,75));}}
  function startPanel(){
@@ -23456,8 +23456,8 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     globalThis.__AEU_VARIABLES__?.mount?.(shell.querySelector('[data-aeu-slot="variables"]'),route.view.owner==='settings');
     globalThis.__AEU_MVU_REPAIR__?.mount?.(shell.querySelector('[data-aeu-slot="mvu"]'));
     trace('engineAndNavigation');
-    globalThis.__AEU_TAB_STRIPS__?.decorate?.();
-    globalThis.__AEU_MOBILE_NAV__?.decorate?.();
+    const nativeChrome=route.page.id!=='tools'||!shell.hasAttribute('data-air-embedded')||!shell.hasAttribute('data-aeu-phone-edition');
+    if(nativeChrome){globalThis.__AEU_TAB_STRIPS__?.decorate?.();globalThis.__AEU_MOBILE_NAV__?.decorate?.();}
     trace('tabLayout');
     if(route.page.id!=='tools'&&(!shell.hasAttribute('data-air-embedded')||route.view.owner==='status'||['actors','organizations'].includes(route.page.id))){globalThis.__AEU_POLISH__?.decorate?.();globalThis.__AEU_DENSITY__?.decorate?.();}
     trace('recordChrome');
@@ -23513,7 +23513,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     shell.querySelector('[data-aeu-resume]').hidden=!backstage||workflow?.状态!=='失败';
     // Same-type, exact-name contact snapshots sit beside the autonomous record.
     // No identity equivalence or automatic overwrite is inferred from a name.
-    if (panel) panel.querySelectorAll('[data-aew-record-name]').forEach(card => {
+    if (panel&&route.view.owner==='engine'&&['actors','organizations'].includes(route.page.id)) panel.querySelectorAll('[data-aew-record-name]').forEach(card => {
       const name = card.dataset.aewRecordName;
       const kind = card.closest('[data-aew-subpage="npc"],[data-aew-subpage="players"],[data-aew-subpage="creatures"],[data-aew-subpage="factions"],[data-aew-subpage="forces"],[data-aew-subpage="guilds"]')?.dataset.aewSubpage;
       const record=nav.contact(stat,kind,name);
@@ -23718,7 +23718,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
 })();
 
 
-globalThis.__AEU_RELEASE_VERSION__ = '1.3.20';
+globalThis.__AEU_RELEASE_VERSION__ = '1.3.21';
 
 /* Accepted phone presentation; no game-state or model-call changes. */
 /* Phone navigation edition. All destinations call the existing native buttons.

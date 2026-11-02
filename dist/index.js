@@ -23444,8 +23444,8 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     globalThis.__AEU_VARIABLES__?.mount?.(shell.querySelector('[data-aeu-slot="variables"]'),route.view.owner==='settings');
     globalThis.__AEU_MVU_REPAIR__?.mount?.(shell.querySelector('[data-aeu-slot="mvu"]'));
     trace('engineAndNavigation');
-    globalThis.__AEU_TAB_STRIPS__?.decorate?.();
-    globalThis.__AEU_MOBILE_NAV__?.decorate?.();
+    const nativeChrome=route.page.id!=='tools'||!shell.hasAttribute('data-air-embedded')||!shell.hasAttribute('data-aeu-phone-edition');
+    if(nativeChrome){globalThis.__AEU_TAB_STRIPS__?.decorate?.();globalThis.__AEU_MOBILE_NAV__?.decorate?.();}
     trace('tabLayout');
     if(route.page.id!=='tools'&&(!shell.hasAttribute('data-air-embedded')||route.view.owner==='status'||['actors','organizations'].includes(route.page.id))){globalThis.__AEU_POLISH__?.decorate?.();globalThis.__AEU_DENSITY__?.decorate?.();}
     trace('recordChrome');
@@ -23501,7 +23501,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     shell.querySelector('[data-aeu-resume]').hidden=!backstage||workflow?.状态!=='失败';
     // Same-type, exact-name contact snapshots sit beside the autonomous record.
     // No identity equivalence or automatic overwrite is inferred from a name.
-    if (panel) panel.querySelectorAll('[data-aew-record-name]').forEach(card => {
+    if (panel&&route.view.owner==='engine'&&['actors','organizations'].includes(route.page.id)) panel.querySelectorAll('[data-aew-record-name]').forEach(card => {
       const name = card.dataset.aewRecordName;
       const kind = card.closest('[data-aew-subpage="npc"],[data-aew-subpage="players"],[data-aew-subpage="creatures"],[data-aew-subpage="factions"],[data-aew-subpage="forces"],[data-aew-subpage="guilds"]')?.dataset.aewSubpage;
       const record=nav.contact(stat,kind,name);
