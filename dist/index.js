@@ -19707,7 +19707,7 @@ return `\n组织视角与客观结果必须分开：每个实际行动的阵营�
     const query = text(communityQuery).toLocaleLowerCase();
     const matched = posts.filter(post => (selectedCommunityBoard === 'all' || communityBoardId(post) === selectedCommunityBoard)
       && (!query || `${text(post.title)} ${text(post.content)} ${text(post.authorId)}`.toLocaleLowerCase().includes(query)));
-    return `${heading}${navigation}${flavorSettings}<div class="aew-community-topbar"><b>${escapeHtml(board ? '本板讨论' : '最新讨论')}</b><label><span class="aew-sr-only">搜索帖子</span><input data-aew-community-search type="search" placeholder="搜索帖子、玩家…" value="${escapeHtml(communityQuery)}"></label></div><div class="aew-community-feed">${matched.slice(0, 100).map(post => {
+    return `${heading}${navigation}${flavorSettings}<div class="aew-community-topbar"><button type="button" data-aew-generate-posts ${runtimeStatus(root).locked?'disabled':''} title="只生成社区帖子；使用当前 API 和既有重试设置，不推进世界">生成帖子</button><b>${escapeHtml(board ? '本板讨论' : '最新讨论')}</b><label><span class="aew-sr-only">搜索帖子</span><input data-aew-community-search type="search" placeholder="搜索帖子、玩家…" value="${escapeHtml(communityQuery)}"></label></div><div class="aew-community-feed">${matched.slice(0, 100).map(post => {
       const activity = communityActivity(post);
       return `<button class="aew-community-row" data-aew-open-forum data-aew-post-id="${escapeHtml(post.id)}"><span class="aew-reply-count" aria-label="${safeArray(post.comments).length} 条回复">${safeArray(post.comments).length}</span><div class="aew-post-preview"><h2><span class="aew-post-board">${escapeHtml(COMMUNITY_BOARDS.find(item => item.id === communityBoardId(post))?.name || "交流")}</span>${communityBadge(post)}${escapeHtml(post.title)}</h2><p>${escapeHtml(text(post.content).replaceAll('\n', ' ').slice(0, 100))}</p><span class="aew-post-author"><small>发帖者</small>${escapeHtml(post.authorId)}</span></div><span class="aew-last-reply"><small>${safeArray(post.comments).length ? "最后回复" : "发布时间"}</small>${safeArray(post.comments).length ? `<b>${escapeHtml(activity.author)}</b>` : ""}<time>${escapeHtml(activity.label)}</time></span></button>`;
     }).join('') || `<div class="aew-empty">${query ? '没有找到匹配的帖子。' : '暂无帖子。'}</div>`}</div>${matched.length > 100 ? '<p class="aew-reader-note">当前显示最近100篇，可搜索更早的帖子。</p>' : ''}${settings}`;
@@ -20004,7 +20004,7 @@ function callPlanHtml(root, override) {
         <section data-aew-page="overview" class="aew-mmo-page">
           ${journalHtml(root)}
         </section>
-        <section hidden data-aew-page="community" class="aew-community-page" aria-label="玩家社区"><div class="aeu-community-generate"><button type="button" data-aew-generate-posts ${runtimeStatus(root).locked?'disabled':''} title="只生成社区帖子；使用当前 API 和既有重试设置，不推进世界">生成帖子</button></div>${communityHtml(root)}</section>
+        <section hidden data-aew-page="community" class="aew-community-page" aria-label="玩家社区">${communityHtml(root)}</section>
         <section hidden data-aew-page="actors" class="aew-mmo-page">
           ${menuHeading('actors', '人物档案', '行程、目标与记忆')}${focusSettingsHtml(root)}
           <div class="aew-subtabs" data-aew-subgroup="actors"><button class="active" data-aew-subtab="npc">NPC</button><button data-aew-subtab="players">玩家</button><button data-aew-subtab="creatures">生物</button></div>
