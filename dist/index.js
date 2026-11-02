@@ -23268,7 +23268,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
 (() => {
   const doc = (window.parent || window).document;
   const KEY = 'aelderan_unified_ui_v1';
-  let shell, launcher, observer, timer, mountDelay, scheduled = false, disposed = false, mounting = false;
+  let shell, launcher, observer, timer, mountDelay, mountFrame=null, mountCount=0, scheduled = false, disposed = false, mounting = false;
   const nav = globalThis.__AEU_NAV__;
   let route = nav.resolve(), routing = false, resetContentScroll = false;
   const rememberedViews = {};
@@ -23363,8 +23363,9 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
   function mount() {
     if(!shell||disposed||mounting)return;
     const started=performance.now();
+    if(mountFrame!==null){cancelAnimationFrame(mountFrame);mountFrame=null;scheduled=false;}
     mounting=true;observer?.disconnect();
-    try{mountContent();}finally{mounting=false;if(globalThis.__AEU_RECORD_FILTERS__?.reusingSnapshot)shell.querySelector('#aelderan-content-area')?.setAttribute('data-aeu-filter-compose-ms',(performance.now()-started).toFixed(1));if(!disposed&&observer)observer.observe(doc.body,{childList:true,subtree:true});}
+    try{mountContent();}finally{mounting=false;setAttr(shell,'data-aeu-mount-ms',(performance.now()-started).toFixed(1));setAttr(shell,'data-aeu-mount-count',String(++mountCount));if(globalThis.__AEU_RECORD_FILTERS__?.reusingSnapshot)shell.querySelector('#aelderan-content-area')?.setAttribute('data-aeu-filter-compose-ms',(performance.now()-started).toFixed(1));if(!disposed&&observer)observer.observe(doc.body,{childList:true,subtree:true});}
   }
   function mountContent() {
     if (!shell || disposed) return;
@@ -23380,6 +23381,8 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
       forum = doc.querySelector('[script_id="aew-forum"]');
     }
     const a = shell.querySelector('[data-aeu-slot="play"]'), b = shell.querySelector('[data-aeu-slot="backstage"]');
+    if(status&&status.parentElement!==a)a.appendChild(status);if(forum&&forum.parentElement!==b)b.appendChild(forum);
+    if(shell.hidden||shell.dataset.fdwOpened==='true')return;
     // Move actual nodes, never clone handlers, CSS filters, avatars or resource bars.
     if (status && status.parentElement !== a) a.appendChild(status);
     if (status) {
@@ -23407,7 +23410,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
           pendingNativeOrganization=null;
         }
       }
-      globalThis.__AEU_PRESENTATION__?.decorate?.(status);
+      if(route.view.owner==='status')globalThis.__AEU_PRESENTATION__?.decorate?.(status);
     }
     trace('nativeComposition');
     if (forum && forum.parentElement !== b) b.appendChild(forum);
@@ -23444,10 +23447,9 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     globalThis.__AEU_TAB_STRIPS__?.decorate?.();
     globalThis.__AEU_MOBILE_NAV__?.decorate?.();
     trace('tabLayout');
-    globalThis.__AEU_POLISH__?.decorate?.();
-    globalThis.__AEU_DENSITY__?.decorate?.();
+    if(route.page.id!=='tools'){globalThis.__AEU_POLISH__?.decorate?.();globalThis.__AEU_DENSITY__?.decorate?.();}
     trace('recordChrome');
-    globalThis.__AEU_MAP__?.decorate?.();
+    if(route.page.id==='world')globalThis.__AEU_MAP__?.decorate?.();
     // The native engine reuses one scroller across tabs. A new game page must
     // not inherit the previous page's deep scroll (e.g. diagnostics -> posts).
     if (resetContentScroll) {
@@ -23535,7 +23537,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     }
     clearTimeout(mountDelay);mountDelay=null;
     scheduled = true;
-    requestAnimationFrame(()=> { scheduled = false;if(globalThis.__AEU_MAP__?.isInteracting?.())return scheduleMount();mount(); });
+    mountFrame=requestAnimationFrame(()=> { mountFrame=null;scheduled = false;if(globalThis.__AEU_MAP__?.isInteracting?.())return scheduleMount();mount(); });
   }
   function select(pageId,viewId) {
     let next=nav.resolve(pageId,viewId||rememberedViews[pageId]);
@@ -23571,7 +23573,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
   }
   function close() { globalThis.__AEU_MUSIC__?.closed?.(); if (shell) shell.hidden = true; if (launcher) launcher.hidden = false; }
   function dispose() {
-    disposed = true; observer?.disconnect(); clearInterval(timer);clearTimeout(mountDelay);
+    disposed = true; observer?.disconnect(); clearInterval(timer);clearTimeout(mountDelay);if(mountFrame!==null)cancelAnimationFrame(mountFrame);
     globalThis.__AEU_LEGACY_ENTRANCE__?.dispose?.({removeOwned:true});
     globalThis.__AEU_RECORD_FILTERS__?.dispose?.();
     globalThis.__AEU_MUSIC__?.dispose?.();
@@ -23678,8 +23680,8 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
       shell.style.top=`${Math.max(0,Math.min(h-70,drag.top+event.clientY-drag.y))}px`;shell.style.transform='none';
     });
     mast.addEventListener('pointerup',()=>drag=null); mast.addEventListener('pointercancel',()=>drag=null);
-    observer=new MutationObserver(records=>{if(records.some(record=>!record.target.closest?.('#aeu-music-panel,[data-aeu-music-audio],[data-aeu-music]')))scheduleMount();}); observer.observe(doc.body,{childList:true,subtree:true});
-    timer=setInterval(scheduleMount,1200);
+    observer=new MutationObserver(records=>{if(records.some(record=>!record.target.closest?.('#aeu-music-panel,[data-aeu-music-audio],[data-aeu-music],#fourth-workshop-panel,#aelderan-immersive-reader,.air-atmosphere')))scheduleMount();}); observer.observe(doc.body,{childList:true,subtree:true});
+    timer=setInterval(()=>{if(!shell?.hidden&&shell.dataset.fdwOpened!=='true')scheduleMount();},1200);
     if (typeof eventOn==='function' && typeof tavern_events!=='undefined') {
       if(typeof getButtonEvent==='function')handles.push(eventOn(getButtonEvent('第四天灾论坛'),()=>{
         requestAnimationFrame(()=>{if(!disposed)open();});
