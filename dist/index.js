@@ -12910,7 +12910,7 @@ ${authorIdPrompt.trim()}`;
     try { return await generateRaw(prepare(options)); }
     catch (error) { throw new Error(redact(error?.message || error,options.custom_api)); }
   }
-  function busy() { return globalThis.__AELDERAN_WORLD_ENGINE__?.load?.()?.工作流?.状态 === '运行中'; }
+  function busy() { const engine=globalThis.__AELDERAN_WORLD_ENGINE__;return engine?.isRunning?.() ?? (engine?.load?.()?.工作流?.状态 === '运行中'); }
   function label(selected) { return selected === 'prompt' ? '提示词格式模式' : '接口结构化模式'; }
   function settingsHtml() {
     const selected = mode();
@@ -12973,7 +12973,7 @@ ${authorIdPrompt.trim()}`;
   let notice='修改后点「应用 API 设置」才会生效。载入方案会立即切换已保存的连接。';
   let modelNotice='可手填模型，或加载接口提供的模型列表。读取列表不生成文本、不推进世界。';
   let modelRequests=0, books=[], bookError='';
-  function running(){return globalThis.__AELDERAN_WORLD_ENGINE__?.uiStatus?.()?.状态==='运行中';}
+  function running(){ const engine=globalThis.__AELDERAN_WORLD_ENGINE__;return engine?.isRunning?.() ?? (engine?.uiStatus?.()?.状态 === '运行中'); }
   function configFrom(value){return {AEmodel:String(value.AEmodel||''),AEapiUrl:String(value.AEapiUrl||''),AEapiKey:String(value.AEapiKey||''),AEapiSource:String(value.AEapiSource||''),AEproxyPreset:'',AEstructuredOutputMode:value.AEstructuredOutputMode==='prompt'?'prompt':'schema'};}
   function profileList(){const list=read(scope).AEUsavedApiProfiles;return Array.isArray(list)?list.filter(item=>item&&typeof item.id==='string'&&typeof item.name==='string'):[];}
   function readBooks(){
@@ -13221,6 +13221,86 @@ ${authorIdPrompt.trim()}`;
 
   let running = false;
   let activeRun = null;
+  /* A lease is transient browser state; the saved workflow remains the resume log. */
+function createAewRunGuard({storage, locks, now=Date.now, interval=setInterval, clear=clearInterval,
+  timeout=setTimeout, clearTimeoutFn=clearTimeout, ttl=90000, requestTimeout=300000}={}) {
+  const owner=`page-${now()}-${Math.random().toString(36).slice(2)}`;
+  const key=scope=>'aew-live-run-v1:'+scope;
+  const read=scope=>{try{return JSON.parse(storage?.getItem(key(scope))||'null');}catch{return null;}};
+  const write=(scope,value)=>{try{storage?.setItem(key(scope),JSON.stringify(value));}catch{}};
+  const error=(code,message)=>Object.assign(new Error(message),{code});
+  function status(scope,workflow,local) {
+    if(local && local.chatKey===scope && local.id===workflow?.运行标识)return {locked:true,local:true};
+    const lease=read(scope);
+    if(lease && lease.expires>now())return {locked:true,remote:true};
+    const legacy=workflow?.状态==='运行中' && !workflow?.运行所有者;
+    const recent=legacy && now()-Date.parse(workflow.更新时间)<ttl;
+    return {locked:!!recent,legacy:!!recent,stale:workflow?.状态==='运行中'&&!recent};
+  }
+  async function claim(scope,id,workflow) {
+    const acquire=()=>{
+      if(status(scope,workflow).locked)throw error('AEW_BUSY','此聊天的推演仍在运行，请稍后再试。');
+      const run={id,chatKey:scope,owner,cancelled:false,listeners:new Set()};
+      const beat=()=>{const previous=read(scope);if(previous && previous.owner!==owner && previous.expires>now()){cancel(run);clear(run.timer);return;}write(scope,{id,owner,expires:now()+ttl});};beat();
+      run.timer=interval(beat,10000);return run;
+    };
+    return locks?.request ? locks.request(key(scope),acquire) : acquire();
+  }
+  function check(run) {
+    if(!run)return;
+    if(run.cancelled)throw error('AEW_CANCELLED','已结束本轮等待，后续返回不会写入存档。');
+    const lease=read(run.chatKey);
+    if(lease && lease.owner!==run.owner && lease.expires>now())throw error('AEW_LEASE_LOST','本轮运行权已改变，旧结果未写入。');
+  }
+  function release(run) {
+    if(!run)return;clear(run.timer);
+    const lease=read(run.chatKey);
+    if(lease?.owner===run.owner && lease.id===run.id)try{storage?.removeItem(key(run.chatKey));}catch{}
+  }
+  function cancel(run) {
+    if(!run)return;run.cancelled=true;
+    for(const stop of [...run.listeners])stop(error('AEW_CANCELLED','已结束本轮等待，后续返回不会写入存档。'));
+  }
+  function wait(run,start,assertCurrent=()=>{}) {
+    return new Promise((resolve,reject)=>{
+      let done=false,deadline,poll;
+      const finish=(failure,value)=>{if(done)return;done=true;clearTimeoutFn(deadline);clear(poll);run?.listeners.delete(stop);failure?reject(failure):resolve(value);};
+      const stop=failure=>finish(failure);
+      const verify=()=>{check(run);assertCurrent();};
+      try{verify();}catch(e){finish(e);return;}
+      run?.listeners.add(stop);
+      deadline=timeout(()=>finish(error('AEW_REQUEST_TIMEOUT','本次请求等待超过 5 分钟，已停止等待；服务商可能仍在处理，迟到结果不会写入。')),requestTimeout);
+      poll=interval(()=>{try{verify();}catch(e){finish(e);}},1000);
+      Promise.resolve().then(start).then(value=>{try{verify();finish(null,value);}catch(e){finish(e);}},e=>finish(e));
+    });
+  }
+  return {status,claim,check,release,cancel,wait,owner};
+}
+
+  let runStorage;try{runStorage=(window.parent||window).localStorage;}catch{}
+  const runGuard=createAewRunGuard({storage:runStorage,locks:(window.parent||window).navigator?.locks});
+  function runtimeStatus(root) { return runGuard.status(currentViewerChatKey(),root.工作流,activeRun); }
+  function isRunning() { return runtimeStatus(loadRoot()).locked; }
+  function finishInterruptedRun(run,error) {
+    if(!run || currentViewerChatKey()!==run.chatKey)return;
+    const root=normalizeRoot(readScope(CHAT_SCOPE)[ROOT_KEY]);
+    if(root.工作流.运行标识!==run.id)return;
+    root.工作流={...root.工作流,状态:'失败',错误:text(error?.message||error).slice(0,1500),更新时间:nowIso()};
+    root.工作流.步骤=[...safeArray(root.工作流.步骤),{阶段:root.工作流.阶段,状态:'失败',说明:root.工作流.错误,时间:nowIso()}].slice(-80);
+    saveRoot(root,null,run);
+  }
+  function stopRun() {
+    if(!activeRun || activeRun.chatKey!==currentViewerChatKey())return;
+    runGuard.cancel(activeRun);
+  }
+  function workflowControlsHtml(root) {
+    const state=runtimeStatus(root);
+    if(!state.locked)return '';
+    return '<section class="aeu-run-control"><b>后台推演正在运行</b><p>'+(state.remote?'另一个页面正在处理此聊天，请在那个页面结束运行。':state.legacy?'正在确认旧任务是否仍有效；中断的任务会在 90 秒后解锁。':'可结束本轮等待，保留已完成步骤。已发出的请求可能仍由服务商处理，迟到结果不会写入。')+'</p>'+(state.local?'<button type="button" data-aew-stop>结束运行</button>':'')+'</section>';
+  }
+  function guardedGenerate(options) {
+    return runGuard.wait(activeRun,()=> (globalThis.__AEU_TRANSPORT__?.generate||generateRaw)(options),assertActiveRunUnchanged);
+  }
   let injected = null;
   let observer = null;
   let attachTimer = null;
@@ -13583,7 +13663,8 @@ ${authorIdPrompt.trim()}`;
   }
 
   function assertActiveRunUnchanged(error) {
-    if (['AEW_STALE_RUN','AEW_CALL_BUDGET'].includes(error?.code)) throw error;
+    if (['AEW_STALE_RUN','AEW_CALL_BUDGET','AEW_CANCELLED','AEW_REQUEST_TIMEOUT','AEW_LEASE_LOST'].includes(error?.code)) throw error;
+    runGuard.check(activeRun);
     if (activeRun && currentStoryKey() !== activeRun.storyKey) {
       const error = new Error('正文、聊天或世界时间已改变，本次旧结果未继续写入；请重新推演。');
       error.code = 'AEW_STALE_RUN';
@@ -13591,13 +13672,14 @@ ${authorIdPrompt.trim()}`;
     }
   }
 
-  function saveRoot(root, expectedStoryKey = null) {
+  function saveRoot(root, expectedStoryKey = null, endingRun = null) {
     if (expectedStoryKey !== null && currentStoryKey() !== expectedStoryKey) {
       const error = new Error('检索期间聊天、正文或时间已改变，旧状态未写入当前故事。');
       error.code = 'AEW_STALE_RUN';
       throw error;
     }
-    if (activeRun && root.工作流?.运行标识 === activeRun.id) assertActiveRunUnchanged();
+    const ending=endingRun && endingRun===activeRun && currentViewerChatKey()===endingRun.chatKey && root.工作流?.运行标识===endingRun.id;
+    if (!ending && activeRun && root.工作流?.运行标识 === activeRun.id) assertActiveRunUnchanged();
     const normalized = normalizeRoot(root);
     if (typeof replaceVariables === 'function') {
       // 根状态必须精确替换；深合并会让已删除的角色、事件和测试数据死而复生。
@@ -13610,7 +13692,9 @@ ${authorIdPrompt.trim()}`;
   function loadRoot() {
     const vars = readScope(CHAT_SCOPE);
     const root = normalizeRoot(vars[ROOT_KEY]);
-    if (!vars[ROOT_KEY] || text(vars[ROOT_KEY].版本) !== ENGINE_VERSION) saveRoot(root);
+    const stale=runtimeStatus(root).stale;
+    if(stale){root.工作流={...root.工作流,状态:'失败',错误:'检测到已中断的旧推演，运行锁已释放；已完成步骤和续跑上下文保留。',更新时间:nowIso()};}
+    if (stale || !vars[ROOT_KEY] || text(vars[ROOT_KEY].版本) !== ENGINE_VERSION) saveRoot(root);
     return root;
   }
 
@@ -18347,7 +18431,7 @@ return `\n组织视角与客观结果必须分开：每个实际行动的阵营�
       let result;
       try {
         reserveAiCall(root, originalAttempt === 1 ? '首次' : '重试', attemptInput, inputSize);
-        result = await (globalThis.__AEU_TRANSPORT__?.generate || generateRaw)({
+        result = await guardedGenerate({
           generation_id: `aew-${expected}-${Date.now()}-${originalAttempt}`,
           user_input: attemptInput,
           should_silence: true,
@@ -18403,7 +18487,7 @@ return `\n组织视角与客观结果必须分开：每个实际行动的阵营�
               let repaired;
               try {
                 reserveAiCall(root, '修复', repairInput, repairSize);
-                repaired = await (globalThis.__AEU_TRANSPORT__?.generate || generateRaw)({
+                repaired = await guardedGenerate({
                   generation_id: `aew-repair-${expected}-${Date.now()}-${repairAttempt}`,
                   user_input: repairInput,
                   should_silence: true,
@@ -18693,7 +18777,8 @@ return `\n组织视角与客观结果必须分开：每个实际行动的阵营�
   }
 
   async function runWorld(force = false, resume = false) {
-    if (running) return toastr?.info?.('[世界] 后台推演正在进行');
+    if(resume && loadRoot().工作流.运行上下文?.仅生成社区)return generateCommunityPosts(true);
+    if (running || isRunning()) return toastr?.info?.('[世界] 后台推演正在进行');
     if (pendingNarrative) return toastr?.warning?.('[世界] 正文变量还在更新，请等待更新完成后再推进。');
     if (!unifiedCanCall(loadRoot())) return force || resume ? toastr?.info?.('[世界] 后台推演已暂停或所有内容已停用；可在控制台重新启用。') : undefined;
     const stat = getMvuStatData();
@@ -18719,6 +18804,8 @@ return `\n组织视角与客观结果必须分开：每个实际行动的阵营�
     if (!force && root.调度.上次处理消息 === messageId) return;
     if (!resuming) rememberCheckpoint(root);
     running = true;
+    try { activeRun=await runGuard.claim(currentViewerChatKey(),`run-${Date.now()}-${Math.random().toString(36).slice(2)}`,root.工作流);activeRun.storyKey=currentStoryKey(); }
+    catch(error){running=false;toastr?.warning?.(error.message);return;}
     if (!resuming) {
       root.工作流 = { ...defaultRoot().工作流, 状态: '运行中', 阶段: '世界书检索', 更新时间: nowIso() };
       root.AI诊断 = { ...defaultRoot().AI诊断, 状态: '准备分阶段推演', 阶段: '世界书检索', 分阶段: {}, 历史: safeArray(root.AI诊断?.历史).slice(-MAX_AI_DIAGNOSTICS) };
@@ -18726,12 +18813,12 @@ return `\n组织视角与客观结果必须分开：每个实际行动的阵营�
       root.工作流.状态 = '运行中';
       root.工作流.步骤 = [...safeArray(root.工作流.步骤), { 阶段: root.工作流.阶段, 状态: '重试', 说明: '从失败阶段继续', 时间: nowIso() }].slice(-12);
     }
-    activeRun = { id: `run-${Date.now()}`, storyKey: currentStoryKey() };
+    root.工作流.运行所有者=activeRun.owner;
     root.工作流.运行标识 = activeRun.id;
+    try {
     saveRoot(root);
     renderPanel();
     toastr?.info?.(resuming ? `[世界] 正在从“${root.工作流.阶段}”继续……` : `[世界] 开始推进，计划 ${buildCallPlan(root).基础次数} 次基础API调用（重试与修复另计）`);
-    try {
       let lore;
       let snapshot;
       let recentStory;
@@ -19123,25 +19210,51 @@ return `\n组织视角与客观结果必须分开：每个实际行动的阵营�
       refreshNarrativeInjection();
       toastr?.success?.(`[世界] 推演完成，新增 ${postCount} 篇论坛帖子`);
     } catch (error) {
-      console.error('[艾尔德兰世界] 推演失败', error);
-      if (activeRun && currentStoryKey() !== activeRun.storyKey) {
-        toastr?.warning?.('[世界] 正文、聊天或时间已改变，已停止旧推演，未把剩余结果写入当前故事。');
-        return;
-      }
-      const failedRoot = loadRoot();
-      failedRoot.工作流.状态 = '失败';
-      failedRoot.工作流.错误 = text(error?.message || error).slice(0, 1500);
-      failedRoot.工作流.更新时间 = nowIso();
-      failedRoot.工作流.步骤 = [...safeArray(failedRoot.工作流.步骤), {
-        阶段: failedRoot.工作流.阶段 || '收尾', 状态: '失败', 说明: text(error?.stack || error?.message || error).slice(0, 3000), 时间: nowIso(),
-      }].slice(-12);
-      saveRoot(failedRoot);
-      toastr?.error?.(`推演停在「${failedRoot.工作流.阶段 || '未知阶段'}」：${text(error?.message || error).slice(0, 180)}。详情见论坛控制台 → 运行记录；可从失败处续跑。`);
+      finishInterruptedRun(activeRun,error);
+      toastr?.warning?.('[世界] '+text(error?.message||error).slice(0,180)+'；已完成步骤保留。');
     } finally {
+      runGuard.release(activeRun);
       running = false;
       activeRun = null;
       renderPanel();
     }
+  }
+
+  async function generateCommunityPosts(resume=false) {
+    if(running || isRunning())return toastr?.info?.('[社区] 请先等待当前推演结束。');
+    if(pendingNarrative)return toastr?.warning?.('[社区] 请等待正文变量更新完成。');
+    let root=synchronizeStoryBranch();
+    if(root.连续存档.冲突)return toastr?.warning?.('[社区] 请先解决正文分支冲突。');
+    if(safeArray(root.调度.停用推演模块).includes('community'))return toastr?.info?.('[社区] 社区模块已停用，请先在控制台启用。');
+    const stat=getMvuStatData(),clock=worldClock(stat),messageId=Math.max(0,safeArray(SillyTavern.getContext().chat).length-1);
+    const saved=root.工作流;
+    const resuming=resume && saved.状态==='失败' && saved.运行上下文?.仅生成社区;
+    if(!resuming && saved.状态==='失败' && saved.运行上下文)return toastr?.warning?.('[社区] 上一轮推演尚未处理，请先续跑或开始新推演，避免覆盖恢复记录。');
+    if(resuming && saved.运行上下文.正文指纹!==currentStoryKey())return toastr?.warning?.('[社区] 正文已改变，请开始新推演。');
+    running=true;
+    try{activeRun=await runGuard.claim(currentViewerChatKey(),`community-${Date.now()}-${Math.random().toString(36).slice(2)}`,saved);activeRun.storyKey=currentStoryKey();}
+    catch(error){running=false;toastr?.warning?.(error.message);return;}
+    try {
+      if(!resuming)rememberCheckpoint(root);
+      root.工作流=resuming?saved:{...defaultRoot().工作流,运行上下文:{仅生成社区:true,手动推进:true,世界时间:clock,消息ID:messageId,正文指纹:activeRun.storyKey}};
+      Object.assign(root.工作流,{状态:'运行中',阶段:'独立社区生成',运行标识:activeRun.id,运行所有者:activeRun.owner,更新时间:nowIso()});
+      root.工作流.运行上下文.手动社区批次 ||= activeRun.id;
+      saveRoot(root);renderPanel();
+      const records=root.世界变化记录;
+      const payload=root.工作流.公开载荷||unifiedCommunitySourcePayload(root,clock,records);
+      root.工作流.公开载荷=payload;
+      if(!root.工作流.社区提交计划){
+        const raw=await unifiedRequestCommunity(root,payload,clock,records,stat);
+        const grounded=unifiedGroundCommunity(root,raw,payload,records,stat);
+        const problem=unifiedCommunityResultError(root,grounded);if(problem)throw Error(problem);
+        root.工作流.社区提交计划=unifiedCommunityPlan(root,grounded,clock);saveRoot(root);
+      }
+      const receipt=unifiedCommitCommunity(root,root.工作流.社区提交计划,clock,messageId);
+      Object.assign(root.工作流,{状态:'完成',阶段:'完成',更新时间:nowIso()});
+      rememberCheckpoint(root);saveRoot(root);
+      toastr?.success?.(`[社区] 新增 ${receipt.posts} 篇帖子、${receipt.replies} 条回复；未推进世界。`);
+    }catch(error){finishInterruptedRun(activeRun,error);toastr?.warning?.('[社区] '+text(error?.message||error).slice(0,180));}
+    finally{runGuard.release(activeRun);activeRun=null;running=false;renderPanel();}
   }
 
   function incrementRoundAndMaybeRun() {
@@ -19891,7 +20004,7 @@ function callPlanHtml(root, override) {
         <section data-aew-page="overview" class="aew-mmo-page">
           ${journalHtml(root)}
         </section>
-        <section hidden data-aew-page="community" class="aew-community-page" aria-label="玩家社区">${communityHtml(root)}</section>
+        <section hidden data-aew-page="community" class="aew-community-page" aria-label="玩家社区"><div class="aeu-community-generate"><button type="button" data-aew-generate-posts ${runtimeStatus(root).locked?'disabled':''} title="只生成社区帖子；使用当前 API 和既有重试设置，不推进世界">生成帖子</button></div>${communityHtml(root)}</section>
         <section hidden data-aew-page="actors" class="aew-mmo-page">
           ${menuHeading('actors', '人物档案', '行程、目标与记忆')}${focusSettingsHtml(root)}
           <div class="aew-subtabs" data-aew-subgroup="actors"><button class="active" data-aew-subtab="npc">NPC</button><button data-aew-subtab="players">玩家</button><button data-aew-subtab="creatures">生物</button></div>
@@ -19911,7 +20024,7 @@ function callPlanHtml(root, override) {
           <div data-aew-subpage="personal"><div class="aew-rank-categories" data-aew-subgroup="rank-personal">${PLAYER_RANK_CATEGORIES.map((category, index) => `<button class="${index === 0 ? 'active' : ''}" data-aew-subtab="${escapeHtml(category)}">${escapeHtml(category)}榜</button>`).join('')}</div>${PLAYER_RANK_CATEGORIES.map((category, index) => `<div ${index ? 'hidden' : ''} data-aew-subpage="${escapeHtml(category)}">${rankBoard(root.排行榜.个人, category, '玩家个人')}</div>`).join('')}<details class="aew-newcomers"><summary>新面孔 · ${recentPlayers.length}</summary><div class="aew-roster-grid">${cards(recentPlayers, '暂时没有值得留意的新面孔。', x => `<article><b>${escapeHtml(x.名称)}</b><em>Lv.${Number(x.基础等级 || x.等级) || 1} · ${escapeHtml(x.所属公会 || '独行玩家')}</em><p>${escapeHtml(x.游戏风格 || x.简介 || '新玩家')}</p></article>`)}</div></details></div>
           <div hidden data-aew-subpage="guild">${rankBoard(root.排行榜.公会, '成员数', '玩家公会')}<button class="aeu-guild-directory-link" data-aeu-open-guilds type="button">查看公会档案与驻地</button></div>
         </section>
-        <section hidden data-aew-page="tools" class="aew-mmo-page">${menuHeading('tools', '世界控制台', '运行设置、正文线索与 AI 返回')} ${connectionSettingsHtml()}${globalThis.__AEU_TRANSPORT__?.settingsHtml?.() || ''}${diagnosticFailed || root.工作流.状态 === '失败' ? `<div class="aew-error-banner" role="alert"><span>!</span><div><b>本轮推演没有完成</b><p>${escapeHtml(root.工作流.阶段 || diagnostic.阶段 || '未知阶段')}：${escapeHtml(diagnostic.错误 || '请查看运行记录中的失败原因。')}</p></div><button data-aew-show-diagnostic>查看原文与错误</button></div>` : ''}<div class="aew-subtabs" data-aew-subgroup="tools"><button class="active" data-aew-subtab="settings">运行设置</button><button data-aew-subtab="impact">正文线索</button><button data-aew-subtab="diagnostic">运行记录${diagnosticFailed ? ' · !' : ''}</button></div>
+        <section hidden data-aew-page="tools" class="aew-mmo-page">${menuHeading('tools', '世界控制台', '运行设置、正文线索与 AI 返回')} ${connectionSettingsHtml()}${globalThis.__AEU_TRANSPORT__?.settingsHtml?.() || ''}${workflowControlsHtml(root)}${diagnosticFailed || root.工作流.状态 === '失败' ? `<div class="aew-error-banner" role="alert"><span>!</span><div><b>本轮推演没有完成</b><p>${escapeHtml(root.工作流.阶段 || diagnostic.阶段 || '未知阶段')}：${escapeHtml(diagnostic.错误 || '请查看运行记录中的失败原因。')}</p></div><button data-aew-show-diagnostic>查看原文与错误</button></div>` : ''}<div class="aew-subtabs" data-aew-subgroup="tools"><button class="active" data-aew-subtab="settings">运行设置</button><button data-aew-subtab="impact">正文线索</button><button data-aew-subtab="diagnostic">运行记录${diagnosticFailed ? ' · !' : ''}</button></div>
           <div data-aew-subpage="settings">${callPlanHtml(root)}${scheduleSettingsHtml(root)}${runtimeSettingsHtml(root)}
             <div class="aew-repair-guide"><div><small>失败处理</small><h3>出错时如何处理</h3></div><div class="aew-repair-path"><span><b>空回复 / 截断 / 内容缺项</b>只重跑出错的这一步</span><i>→</i><span><b>返回了内容，但格式错误</b>额外调用修复器，附原文、错误原因和正确结构</span><i>→</i><span><b>仍失败</b>弹出提示，保留现场，可从失败处续跑</span></div></div><details class="aew-resilience"><summary><b>调整失败重试与格式修复</b><span>默认设置已可直接使用</span></summary><div><label>失败后最多重跑<select data-aew-rerolls>${[1,2,3].map(x => `<option value="${x}" ${Number(root.调度.自动重Roll次数) === x ? 'selected' : ''}>${x} 次</option>`).join('')}</select></label><label>格式修复<select data-aew-repair-enabled><option value="开启" ${root.调度.格式修复启用 !== false ? 'selected' : ''}>开启</option><option value="关闭" ${root.调度.格式修复启用 === false ? 'selected' : ''}>关闭</option></select></label><label>每次最多修复<select data-aew-repair-limit>${[1,2].map(x => `<option value="${x}" ${Number(root.调度.格式修复次数) === x ? 'selected' : ''}>${x} 次</option>`).join('')}</select></label><label>论坛最终失败<select data-aew-forum-fallback><option value="本地保底" ${root.调度.论坛失败策略 !== '停止工作流' ? 'selected' : ''}>生成保底帖子</option><option value="停止工作流" ${root.调度.论坛失败策略 === '停止工作流' ? 'selected' : ''}>停止并等待处理</option></select></label></div><p>修复器只改 JSON 语法与字段，不补剧情；空回复与截断没有足够材料，只能重跑。本轮原始返回、修复结果和失败原因都保存在“运行记录”。</p><details class="aew-stage-policies"><summary>各步骤单独设置 <span>留空就沿用上面的通用设置</span></summary><div class="aew-policy-head"><span>步骤</span><span>重跑</span><span>格式修复</span><span>修复次数</span></div>${stagePolicyRows}</details></details>
           </div>
@@ -20627,6 +20740,8 @@ style.textContent += `
       panel.closest('[script_id="aew-forum"]')?.style.setProperty('display', 'none');
     });
     panel.querySelector('[data-aew-run]')?.addEventListener('click', () => runWorld(true));
+    panel.querySelectorAll('[data-aew-generate-posts]').forEach(button=>button.addEventListener('click',()=>generateCommunityPosts()));
+    panel.querySelector('[data-aew-stop]')?.addEventListener('click',stopRun);
     panel.querySelector('[data-aew-retry]')?.addEventListener('click', () => runWorld(true, true));
     panel.querySelector('[data-aew-preview-lore]')?.addEventListener('click', async event => {
       const button = event.currentTarget;
@@ -20791,6 +20906,7 @@ style.textContent += `
   }
 
   function attachWorldButton() {
+    if(unifiedWorkflowView?.状态==='运行中' && runtimeStatus({工作流:unifiedWorkflowView}).stale){loadRoot();renderPanel();}
     const doc = (window.parent || window).document;
     const handle = doc.querySelector('[script_id="aew-forum"] .aew-forum-drag-handle');
     try {
@@ -20883,6 +20999,7 @@ style.textContent += `
   }
 
   setTimeout(boot, 800);
+  window.addEventListener('pagehide',()=>{runGuard.cancel(activeRun);runGuard.release(activeRun);},{once:true});
   globalThis.__AELDERAN_WORLD_ENGINE__ = {
     load: loadRoot,
     save: saveRoot,
@@ -20892,6 +21009,9 @@ style.textContent += `
     toggle: togglePanel,
     render: renderPanel,
     uiStatus: () => unifiedWorkflowView,
+    isRunning,
+    stop: stopRun,
+    generatePosts: generateCommunityPosts,
     inspectLore: () => retrieveLoreContext(loadRoot(), getMvuStatData()),
     addPosts: addPublicPosts,
     syncForum: syncForumPostsFromVariables,
@@ -20908,6 +21028,7 @@ style.textContent += `
     },
   };
   globalThis.__AELDERAN_WORLD_ENGINE_CLEANUP__ = () => {
+    runGuard.cancel(activeRun);runGuard.release(activeRun);
     resetNarrativeSettlement();
     mvuListenerName = '';
     try { observer?.disconnect(); } catch { /* ignore */ }
@@ -23382,6 +23503,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     }
     const a = shell.querySelector('[data-aeu-slot="play"]'), b = shell.querySelector('[data-aeu-slot="backstage"]');
     if(status&&status.parentElement!==a)a.appendChild(status);if(forum&&forum.parentElement!==b)b.appendChild(forum);
+    if(status){setAttr(shell,'data-theme',status.classList.contains('theme-dark')?'dark':'light');if(launcher)setAttr(launcher,'data-theme',shell.dataset.theme);}
     if(shell.hidden||shell.dataset.fdwOpened==='true')return;
     // Move actual nodes, never clone handlers, CSS filters, avatars or resource bars.
     if (status && status.parentElement !== a) a.appendChild(status);
@@ -23481,7 +23603,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     const nativeRun = panel?.querySelector('[data-aew-run]');
     const engine = globalThis.__AELDERAN_WORLD_ENGINE__;
     const workflow = engine?.uiStatus ? engine.uiStatus() : engine?.load?.()?.工作流;
-    const busy = workflow?.状态 === '运行中' || !!nativeRun?.disabled;
+    const busy = engine?.isRunning?.() ?? (workflow?.状态 === '运行中' || !!nativeRun?.disabled);
     refresh.disabled = !engine?.run || busy;
     const runLabel = busy ? '推演中…' : '推进世界';
     // Observe the legacy panels without generating an endless child-list refresh loop.
