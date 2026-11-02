@@ -23447,7 +23447,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
     globalThis.__AEU_TAB_STRIPS__?.decorate?.();
     globalThis.__AEU_MOBILE_NAV__?.decorate?.();
     trace('tabLayout');
-    if(route.page.id!=='tools'){globalThis.__AEU_POLISH__?.decorate?.();globalThis.__AEU_DENSITY__?.decorate?.();}
+    if(route.page.id!=='tools'&&(!shell.hasAttribute('data-air-embedded')||route.view.owner==='status'||['actors','organizations'].includes(route.page.id))){globalThis.__AEU_POLISH__?.decorate?.();globalThis.__AEU_DENSITY__?.decorate?.();}
     trace('recordChrome');
     if(route.page.id==='world')globalThis.__AEU_MAP__?.decorate?.();
     // The native engine reuses one scroller across tabs. A new game page must
@@ -23527,6 +23527,7 @@ globalThis.__AEU_MUSIC_ASSET_BASE__ = "https://raw.githubusercontent.com/xgdddl/
       contact.dataset.stamp=stamp;contact.open=openState || (organizational && !card.hasAttribute('data-aeu-org-active'));
     });
     trace('headerAndContacts');
+    setAttr(shell,'data-aeu-layout-phases',JSON.stringify(phases));
     if(globalThis.__AEU_RECORD_FILTERS__?.reusingSnapshot)status?.querySelector('#aelderan-content-area')?.setAttribute('data-aeu-filter-phases',JSON.stringify(phases));
   }
   function scheduleMount() {
