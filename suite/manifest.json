@@ -1,17 +1,17 @@
 {
-  "version": "1.3.17",
-  "tag": "v1.3.17",
+  "version": "1.3.18",
+  "tag": "v1.3.18",
   "runtimePath": "suite/index.js",
-  "runtimeBytes": 3875612,
-  "runtimeSHA256": "6827e108743ed36edb34a35b8e3cbaf550916d1019dab19932623d8f51c68f15",
-  "entry": "fourth-disaster-online-v1.3.17.json",
-  "entryBytes": 25439,
-  "entrySHA256": "3cbe3444030c44fb01d06039ca6de858950f0c226420a9e8cf8c803d0eb5bd60",
-  "cdn": "https://cdn.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@v1.3.17/suite/index.js",
+  "runtimeBytes": 3875785,
+  "runtimeSHA256": "ab910cd5165bf44900a5b903604bfa3fa1e35d6cafad3c89dab7e6d9b295af07",
+  "entry": "fourth-disaster-online-v1.3.18.json",
+  "entryBytes": 25472,
+  "entrySHA256": "7e6bbee8ee751c49f2f4bdd8ba08242288c4e69f48fed57853172805732ecad6",
+  "cdn": "https://cdn.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@v1.3.18/suite/index.js",
   "components": {
     "panel": "1.3.11+ui-lifecycle",
     "workshop": "0.1.5",
-    "readerSHA256": "8ee52fa41810feb4fb9524238e5cafff71c289e5adafd73a8310ca8a2a5ca1c9"
+    "readerSHA256": "7c4a79b93c2cdf196d7456893bfefaa98f9b032fd4ede2ebb292e8d720b45fad"
   },
   "entryExportId": "104d90b3-679d-4484-8c3f-0a419cc453d5",
   "preservedStorage": {
