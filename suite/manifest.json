@@ -1,22 +1,16 @@
 {
-  "version": "1.3.24",
-  "tag": "v1.3.24",
+  "version": "1.3.25",
+  "tag": "v1.3.25",
+  "repository": "xgdddl/fourth-disaster-panel",
   "runtimePath": "suite/index.js",
-  "runtimeBytes": 3903107,
-  "runtimeSHA256": "a9a86a410749b0999f09ab5ef35ca374d18cf22167de306fd2225372ec3ac9c9",
-  "entry": "fourth-disaster-online-v1.3.24.json",
-  "entryBytes": 26104,
-  "entrySHA256": "53099329deb4a585f42ea93fd440779795a7ce08d09e35c41b5b99bab2d90db4",
-  "cdn": "https://cdn.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@v1.3.24/suite/index.js",
-  "components": {
-    "panel": "1.3.11+ui-lifecycle",
-    "workshop": "0.1.6",
-    "readerSHA256": "1da80b69703fb4eedc791a55a13f3f353b903cdcc6e853e0f7130b78890bc87d"
-  },
-  "entryExportId": "104d90b3-679d-4484-8c3f-0a419cc453d5",
-  "preservedStorage": {
-    "workshopDatabase": "fourth-disaster-workshop-v1"
-  },
-  "helperCount": 171,
-  "deliveryDir": "交付/第四天灾-最终整合在线版-V1.3.24-20261103"
+  "runtimeBytes": 3935432,
+  "runtimeSHA256": "6dbf0a461bcd0d6971a93ec29146ed28af578398d5b4903e09b8709062946cb8",
+  "entry": "fourth-disaster-online-v1.3.25.json",
+  "entryBytes": 25976,
+  "entrySHA256": "197fc4f59dc72bbc5a88a318030b4d618416a81f9073d9eb9fea64de10953265",
+  "cdn": "https://cdn.jsdelivr.net/gh/xgdddl/fourth-disaster-panel@v1.3.25/suite/index.js",
+  "readerAndWorkshopBusinessUnchanged": true,
+  "controlledTests": 45,
+  "realProviderAcceptance": "pending",
+  "deliveryDir": "交付/第四天灾-最终整合在线版-V1.3.25-20261108"
 }
