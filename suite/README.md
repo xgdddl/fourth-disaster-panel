@@ -1,6 +1,12 @@
-# 第四天灾 · 最终整合版 V1.3.27
+# 第四天灾 · 最终整合版 V1.3.28
 
-[下载酒馆助手导入文件](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.27/fourth-disaster-online-v1.3.27.json)
+[下载酒馆助手导入文件](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.28/fourth-disaster-online-v1.3.28.json)
+
+调整沉浸阅读右侧的帖子详情：作者、头像和楼主标记横排在正文上方，内容使用整行宽度；缩小标题与留白，整理引用、时间、楼层、回复按钮及输入框。修复桌面窄栏仍保留118px作者侧栏、正文被挤成细长条的问题。
+
+仅修改带沉浸嵌入标记的社区详情样式。独立面板、推演、MVU、API设置和存档逻辑沿用，未增加模型调用。
+
+## 之前版本记录
 
 修复玩家社区交替帖子底色过于透明的问题：深色与明亮模式下，每篇帖子都使用完整底色，保留背景的轻微透视与悬停反馈；同时补齐社区工具栏底色，并提高回复头像文字对比。列表、主帖和回复布局继续沿用。
 

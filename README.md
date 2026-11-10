@@ -1,4 +1,4 @@
-> 当前整合版：[第四天灾 V1.3.27 · 状态栏、持续世界与玩家社区](suite/README.md)
+> 当前整合版：[第四天灾 V1.3.28 · 状态栏、持续世界与玩家社区](suite/README.md)
 
 # 第四天灾 · 统一状态栏
 
@@ -13,7 +13,7 @@
 
 可按轮次或游戏时间推进，自选参与内容与独立调用，支持失败重试和格式修复。深浅主题、可拖动入口与手机布局均已整合。
 
-[下载统一面板在线版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.27/fourth-disaster-online-v1.3.27.json)，导入酒馆助手并启用即可；请勿与本地完整版同时启用。需要配套世界书与变量，聊天和API设置保留在本地。MVU修复依赖当前卡的MVU与ZOD；[只读适配桥](integrations/mvu-zod-readonly-bridge.js)供接入现用ZOD脚本，不作为独立脚本运行，不替换原Schema。
+[下载统一面板在线版](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.28/fourth-disaster-online-v1.3.28.json)，导入酒馆助手并启用即可；请勿与本地完整版同时启用。需要配套世界书与变量，聊天和API设置保留在本地。MVU修复依赖当前卡的MVU与ZOD；[只读适配桥](integrations/mvu-zod-readonly-bridge.js)供接入现用ZOD脚本，不作为独立脚本运行，不替换原Schema。
 
 [创意工坊在线版 V0.1.3](https://github.com/xgdddl/fourth-disaster-panel/releases/download/v1.3.11/fourth-disaster-workshop-online-v0.1.3.json)为可选配套脚本，可浏览、创作和安装社区内容。它与统一面板分开启用，同类工坊只启用一份；共享作品服务仍使用原工坊网站。
 
